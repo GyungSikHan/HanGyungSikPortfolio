@@ -84,7 +84,7 @@ const projectDetails = {
         image: 'image/web2.jpg',
         github: 'https://github.com/GyungSikHan/BlossomOfShadow',
         youtube: 'https://youtu.be/sI_5kmsh7MY?si=c9rURz7Vihq2td_J',
-        project: 'https://drive.google.com/file/d/1LRnWCWV3obmQORMKDY8yV8YeIxzddGuA/view?usp=sharing',
+        project: 'https://drive.google.com/file/d/1PpsPOJKj8707m6JqEeOPmhDDgPz4zifB/view?usp=sharing',
         features: [
             'DirectX11 기반 렌더링 파이프라인 구성',
             '캐릭터 이동, 공격, 피격 상태 구현',
