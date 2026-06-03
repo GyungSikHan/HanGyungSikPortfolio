@@ -4,7 +4,7 @@
 
 ---
 
-## 🎮 Individual Projects
+## 🎮 Solo Projects
 
 ### 🌸 Blossom Of Shadow (개인 프로젝트)
 > Unreal Engine 기반 3D 액션 RPG (1인 개발)
