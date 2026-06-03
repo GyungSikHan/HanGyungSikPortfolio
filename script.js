@@ -84,7 +84,7 @@ const projectDetails = {
         image: 'image/web2.jpg',
         github: 'https://github.com/GyungSikHan/BlossomOfShadow',
         youtube: 'https://youtu.be/sI_5kmsh7MY?si=c9rURz7Vihq2td_J',
-        Project: 'https://drive.google.com/file/d/1LRnWCWV3obmQORMKDY8yV8YeIxzddGuA/view?usp=sharing',
+        project: 'https://drive.google.com/file/d/1LRnWCWV3obmQORMKDY8yV8YeIxzddGuA/view?usp=sharing',
         features: [
             'DirectX11 기반 렌더링 파이프라인 구성',
             '캐릭터 이동, 공격, 피격 상태 구현',
@@ -262,6 +262,15 @@ function openModal(projectId) {
     }
 
     const featuresHtml = project.features.map(feature => `<li>${feature}</li>`).join('');
+    const linksHtml = [
+        ['GitHub', project.github],
+        ['YouTube', project.youtube],
+        ['Project', project.project]
+    ]
+        .filter(link => link[1])
+        .map(link => `<a href="${link[1]}" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">${link[0]}</a>`)
+        .join('');
+
     const detailsHtml = project.details.map((detail, index) => {
         const tagsHtml = detail.tags.map(tag => `
             <p class="feature-line">
@@ -293,9 +302,7 @@ function openModal(projectId) {
         <div class="new-modal-layout">
             <div class="project-left-column">
                 <img src="${project.image}" alt="${project.title} 대표 이미지" class="project-summary-image">
-                <a href="${project.github}" class="btn btn-secondary modal-github" target="_blank" rel="noopener noreferrer">GitHub</a>
-                <a href="${project.youtube}" class="btn btn-secondary modal-youtube" target="_blank" rel="noopener noreferrer">YouTube</a>
-                <a href="${project.project}" class="btn btn-secondary modal-project" target="_blank" rel="noopener noreferrer">Project</a>
+                ${linksHtml}
             </div>
             <div class="vertical-divider"></div>
             <div class="project-right-column">
