@@ -128,11 +128,13 @@ const projectDetails = {
         ]
     },
     FinalTeam: {
-        title: 'Undervein',
-        subtitle: 'Unity 개인 프로젝트',
+        title: 'EMBER : The Eterna Blizzard',
+        subtitle: 'Unreal Survival Action 팀 프로젝트 / 6인',
         description: 'Unity 기반 Top-Down RPG 프로젝트입니다. 전투, 아이템, NPC, 퀘스트 흐름을 하나의 플레이 루프로 구성했습니다.',
         image: 'image/web2.jpg',
-        github: 'https://github.com/GyungSikHan',
+        github: 'https://github.com/GyungSikHan/1st-Team4-Final-Project',
+        youtube: 'https://youtu.be/1DuNwBaC0Xg?si=53Nf7StepMJgE4cC',
+        project: 'https://drive.google.com/file/d/1PpsPOJKj8707m6JqEeOPmhDDgPz4zifB/view',
         features: [
             '탑다운 3D 컨트롤 구현',
             'AI 및 전투 시스템 구성',
@@ -176,12 +178,14 @@ const projectDetails = {
             }
         ]
     },
-    FirstTeam: {
-        title: 'Puzzle Blocks',
-        subtitle: 'Unity 캐주얼 프로젝트',
+    SecondTeam: {
+        title: 'SYMBIO Project',
+        subtitle: 'Unreal FPS 팀 프로젝트 / 4인',
         description: '그리드에 블록을 배치하고 점수를 획득하는 캐주얼 퍼즐 게임입니다.',
         image: 'image/web2.jpg',
-        github: 'https://github.com/GyungSikHan',
+        github: 'https://github.com/GyungSikHan/1st-Team14-CH3-Project',
+        youtube: 'https://youtu.be/tJcozATuAgQ?si=a0gReyRljIx07e7P',
+        project: 'https://drive.google.com/file/d/1wuGg5KNYLVXD0ZXs_h4th62TAfnBNP6L/view',
         features: [
             '그리드 기반 블록 배치 판정',
             '블록 모양 데이터 관리',
@@ -213,12 +217,14 @@ const projectDetails = {
             }
         ]
     },
-    team: {
-        title: 'Team Action Game',
-        subtitle: 'DirectX11 팀 프로젝트',
+    FirstTeam: {
+        title: 'Text RPG',
+        subtitle: 'C++ 팀 프로젝트 / 4인',
         description: '팀으로 진행한 3D 액션 게임 모작 프로젝트입니다. 맵툴, 기믹, 네비게이션, 최적화 파트를 중심으로 기여했습니다.',
         image: 'image/web2.jpg',
-        github: 'https://github.com/GyungSikHan',
+        github: 'https://github.com/GyungSikHan/Let_sDoItFirst',
+        youtube: 'https://youtu.be/QqcPvBTLAaA?si=Q8kETZwgl9uYdcV0',
+        project: 'https://drive.google.com/file/d/1T6DfcRIsckD-XOfbujmkS645I34GVanF/view?usp=sharing',
         features: [
             '맵툴 및 레벨 배치 기능',
             '기믹 오브젝트 상호작용',
