@@ -101,12 +101,11 @@
                     <div class="project-description">
                         <p>3인칭 Action RPG 프로젝트</p>
                         <ul class="project-features">
-                            <li>1인 개발로 전투, AI, 무기, UI 시스템 등 전반의 구조 설계 및 구현
-</li>
-                            <li>Combat/Weapon 시스템 구현(공중 콤보 입력 처리, 패링 판정 로직 등)</li>
-                            <li>무기별 스킬 시스템 설계</li>
+                            <li>1인 개발로 전투, AI, 무기, UI 시스템 등 전반의 구조 설계 및 구현</li>
+                            <li>Combat/Weapon 시스템 구현(무기 장착, 기본 콤보, 공중 콤보, 패링 판정)</li>
+                            <li>무기별 스킬 시스템 설계(Aura, BlackHole, Meteor, AirCombo 등)</li>
                             <li>Behavior Tree 기반 Boss/Team AI 구현</li>
-                            <li>Level Sequence를 활용한 컷씬 구성</li>
+                            <li>Level Sequence 기반 Portal/Cinematic 컷씬 및 Boss UI 연동</li>
                         </ul>
                     </div>
                     <div class="project-tech">
@@ -135,18 +134,18 @@
                     <div class="project-description">
                         <p>Survival Action 프로젝트</p>
                         <ul class="project-features">
-                            <li>AI 전투 시스템 설계 및 구현</li>
-                            <li>Behavior Tree 기반 AI 공격 로직 구현</li>
-                            <li>데이터 기반 Damage 시스템 구현</li>
-                            <li>AI Weapon 충돌 판정 시스템 구현</li>
-                            <li>ArmorComponent 기반 플레이어 장비 시스템 구현</li>
-                            <li>Main UI 에셋 프로젝트 흐름 연동</li>
+                            <li>AI 전투 시스템 설계 및 구현(Combat / Weapon / Damage / Sound 분리)</li>
+                            <li>Behavior Tree 기반 Dragon AI 공격 로직 구현</li>
+                            <li>FDamageData 기반 데이터형 Damage 시스템 구현</li>
+                            <li>AI Weapon 충돌 판정 및 중복 타격 방지 처리</li>
+                            <li>ArmorComponent 기반 방어구 장착 Replication 동기화</li>
+                            <li>Main UI 에셋과 GameMode / GameInstance 진입 흐름 연동</li>
                         </ul>
                     </div>
                     <div class="project-tech">
                         <span class="tech-tag">C++</span>
                         <span class="tech-tag">Unreal</span>
-                        <span class="tech-tag">Git</span>
+                        <span class="tech-tag">Github</span>
                         <span class="tech-tag">Slack</span>
                         <span class="tech-tag">Notion</span>
                     </div>
@@ -175,13 +174,13 @@
                             <li>Weapon Base + Component 구조 설계</li>
                             <li>발사 및 데미지 처리 파이프라인 구현</li>
                             <li>Aim / Recoil / 카메라 연출 구현</li>
-                            <li>팀장으로써 팀원의 문제 해결</li>
+                            <li>팀장으로서 팀원의 문제 해결 지원</li>
                         </ul>
                     </div>
                     <div class="project-tech">
                         <span class="tech-tag">C++</span>
                         <span class="tech-tag">Unreal</span>
-                        <span class="tech-tag">Git</span>
+                        <span class="tech-tag">Github</span>
                         <span class="tech-tag">Slack</span>
                         <span class="tech-tag">Notion</span>
                     </div>
@@ -207,7 +206,7 @@
                     <div class="project-description">
                         <p>Text RPG</p>
                         <ul class="project-features">
-                            <li>Singleton 기판 Game Manager 설계</li>
+                            <li>Singleton 기반 Game Manager 설계</li>
                             <li>상태 전환 기반 게임루프 구조 구현</li>
                             <li>Console UI 출력 구조 설계</li>
                             <li>팀원의 구현 내용을 Game Manager에 연결</li>
@@ -215,7 +214,7 @@
                     </div>
                     <div class="project-tech">
                         <span class="tech-tag">C++</span>
-                        <span class="tech-tag">Git</span>
+                        <span class="tech-tag">Github</span>
                         <span class="tech-tag">Slack</span>
                         <span class="tech-tag">Notion</span>
                     </div>
@@ -325,7 +324,7 @@
                     </div>
                 </div>
                 <div class="contact-form">
-                    <form action="#" method="POST">
+                    <form id="contactForm">
                         <div class="form-group">
                             <input type="text" name="name" placeholder="이름" required>
                         </div>
@@ -336,6 +335,7 @@
                             <textarea name="message" placeholder="메시지" rows="5" required></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">메시지 보내기</button>
+                        <p class="form-status" aria-live="polite"></p>
                     </form>
                 </div>
             </div>

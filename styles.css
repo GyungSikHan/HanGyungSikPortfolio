@@ -492,6 +492,7 @@ section:nth-child(even) {
     animation-name: animatetop;
     animation-duration: 0.4s;
     position: relative;
+    overflow-x: hidden;
 }
 
 .close-button {
@@ -524,6 +525,7 @@ section:nth-child(even) {
     padding-right: 44px;
     padding-bottom: 30px;
     border-bottom: 1px solid var(--text-color);
+    min-width: 0;
 }
 
 .project-left-column {
@@ -559,6 +561,7 @@ section:nth-child(even) {
 
 .project-right-column {
     flex: 1;
+    min-width: 0;
 }
 
 .project-right-column h1 {
@@ -566,6 +569,7 @@ section:nth-child(even) {
     margin-bottom: 5px;
     color: white;
     line-height: 1.15;
+    overflow-wrap: anywhere;
 }
 
 .project-right-column h4 {
@@ -577,24 +581,28 @@ section:nth-child(even) {
 .project-right-column ul {
     padding-left: 1.3rem;
     line-height: 1.65;
+    overflow-wrap: anywhere;
 }
 
 .modal-feature-section {
     margin-top: 58px;
     padding-top: 0;
     border-top: 1px solid var(--border-color);
+    min-width: 0;
 }
 
 .modal-feature-section h3 {
     font-size: 1.75rem;
     color: white;
     margin: 26px 0 8px;
+    overflow-wrap: anywhere;
 }
 
 .modal-feature-section h4 {
     font-size: 1.18rem;
     color: var(--accent-color);
     margin-bottom: 14px;
+    overflow-wrap: anywhere;
 }
 
 .modal-feature-section > p {
@@ -602,6 +610,7 @@ section:nth-child(even) {
     font-weight: 500;
     line-height: 1.75;
     margin-bottom: 24px;
+    overflow-wrap: anywhere;
 }
 
 .modal-feature-row {
@@ -609,6 +618,7 @@ section:nth-child(even) {
     align-items: center;
     gap: 18px;
     margin-top: 14px;
+    min-width: 0;
 }
 
 .modal-feature-row.reverse {
@@ -625,6 +635,7 @@ section:nth-child(even) {
 
 .modal-feature-row .text-content {
     flex: 1;
+    min-width: 0;
 }
 
 .modal-tabs {
@@ -636,8 +647,13 @@ section:nth-child(even) {
 
 .modal-tab {
     padding: 0 10px 8px;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    background: transparent;
     color: var(--text-color-darker);
     font-size: 0.92rem;
+    font-family: inherit;
+    cursor: pointer;
 }
 
 .modal-tab.active {
@@ -646,16 +662,30 @@ section:nth-child(even) {
     font-weight: 700;
 }
 
+.modal-tab:hover {
+    color: var(--accent-color);
+}
+
+.tab-panel {
+    display: none;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
 .feature-line {
     display: flex;
     align-items: center;
     gap: 14px;
     margin: 14px 0;
     line-height: 1.5;
+    min-width: 0;
 }
 
 .feature-title {
-    min-width: 92px;
+    min-width: 112px;
+    max-width: 180px;
     padding: 0.45rem 0.8rem;
     border: 1px solid #696969;
     border-radius: 10px;
@@ -663,11 +693,18 @@ section:nth-child(even) {
     font-size: 0.85rem;
     font-weight: 700;
     text-align: center;
+    line-height: 1.25;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    flex: 0 0 auto;
 }
 
 .feature-desc {
     color: var(--text-color);
     font-size: 0.95rem;
+    min-width: 0;
+    overflow-wrap: anywhere;
 }
 
 .skills {
@@ -845,6 +882,14 @@ section:nth-child(even) {
     min-height: 120px;
 }
 
+.form-status {
+    margin-top: 1rem;
+    margin-bottom: 0;
+    color: var(--text-color-darker);
+    font-size: 0.92rem;
+    line-height: 1.5;
+}
+
 .footer {
     background-color: #111;
     color: var(--text-color-darker);
@@ -1017,6 +1062,12 @@ section:nth-child(even) {
         align-items: flex-start;
         flex-direction: column;
         gap: 8px;
+    }
+
+    .feature-title {
+        min-width: 0;
+        max-width: 100%;
+        width: fit-content;
     }
 
     .footer-content {
