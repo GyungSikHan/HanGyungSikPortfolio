@@ -251,8 +251,13 @@ section:nth-child(even) {
 .about-text p {
     font-size: 1.1rem;
     line-height: 1.8;
-    margin-bottom: 2rem;
+    margin-bottom: 1.35rem;
     color: var(--text-color);
+    overflow-wrap: anywhere;
+}
+
+.about-text p:last-child {
+    margin-bottom: 0;
 }
 
 .about-highlights {
