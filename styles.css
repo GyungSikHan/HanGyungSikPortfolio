@@ -632,8 +632,10 @@ section:nth-child(even) {
 
 .modal-feature-row img {
     width: min(42%, 390px);
+    height: auto;
     max-height: 230px;
-    object-fit: cover;
+    object-fit: contain;
+    background: #181818;
     border-radius: 8px;
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
 }

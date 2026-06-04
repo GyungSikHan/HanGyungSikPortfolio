@@ -168,7 +168,7 @@ const projectDetails = {
                 title: '무기별 스킬 시스템',
                 subtitle: 'CSkills 기반으로 무기와 분리된 액션 스킬 구조 설계',
                 description: '스킬 입력을 WeaponComponent에서 호출하고, CSkills를 상속받은 개별 스킬 클래스에서 Pressed/Released/Begin/End/Tick 흐름을 구현했습니다. 무기별로 Aura, BlackHole, Meteor, Ground Smash, Bow Zooming, AirCombo, Parry 등 다른 액션을 확장할 수 있게 구성했습니다.',
-                image: 'image/BlossomOfShadow/image 177.png',
+                image: 'image/BlossomOfShadow/image 203.png',
                 tags: [
                     ['공통 구조', 'Skill_Pressed / Skill_Released로 입력 단계 분리'],
                     ['Blueprint 연동', 'BlueprintNativeEvent로 C++/Blueprint 확장성 확보'],
@@ -224,7 +224,7 @@ const projectDetails = {
         title: 'EMBER : The Eternal Blizzard',
         subtitle: 'Unreal Survival Action 팀 프로젝트 / 6인',
         description: 'Unreal Engine 5.5 기반 6인 팀 Survival Action 프로젝트입니다. AI 전투 시스템, 방어구 장착 Replication, Main UI 진입 흐름을 중심으로 구현했습니다.',
-        image: 'image/Ember/image3.png',
+        image: 'image/Ember/image.png',
         github: 'https://github.com/GyungSikHan/1st-Team4-Final-Project',
         youtube: 'https://youtu.be/1DuNwBaC0Xg?si=53Nf7StepMJgE4cC',
         project: 'https://drive.google.com/file/d/1PpsPOJKj8707m6JqEeOPmhDDgPz4zifB/view',
@@ -240,7 +240,7 @@ const projectDetails = {
                 title: 'AI 전투 시스템 구조화',
                 subtitle: 'Combat / Weapon / Damage / Sound 책임을 분리한 AI 전투 구조 설계',
                 description: 'AI 전투 기능을 하나의 클래스에 몰아넣지 않고 Combat, Weapon, Damage, Sound 흐름으로 나누어 구성했습니다. Behavior Tree Task는 공격 상태 진행을 담당하고, Weapon은 충돌 구간, Damage는 데이터 기반 타격 처리, Sound는 AnimNotify 기반 연출 호출을 맡도록 분리했습니다.',
-                image: 'image/Ember/image2.png',
+                image: 'image/Ember/image4.png',
                 tags: [
                     ['Combat', 'BT Task에서 공격 몽타주 실행과 AI 상태 흐름 제어'],
                     ['Weapon', 'AI 전용 Weapon Actor에서 충돌체 수집과 공격 판정 처리'],
@@ -276,7 +276,7 @@ const projectDetails = {
                 title: 'AI Weapon 충돌 / Damage 시스템',
                 subtitle: '공격 시점에만 충돌체를 활성화하고 중복 타격을 방지하는 판정 구조',
                 description: 'AI Weapon이 가진 충돌체를 Spawn 시점에 수집하고, 평소에는 비활성화했다가 공격 Notify 구간에서만 활성화하도록 구성했습니다. Overlap 발생 시 소유자와 같은 클래스는 제외하고, 이미 맞은 대상은 Hitted 배열로 중복 처리되지 않게 막은 뒤 현재 공격 인덱스의 HitData로 데미지를 전달했습니다.',
-                image: 'image/Ember/image8.png',
+                image: 'image/Ember/image4.gif',
                 tags: [
                     ['Collision 수집', 'Root 하위 ShapeComponent를 탐색해 Overlap 이벤트 바인딩'],
                     ['공격 구간', 'OnCollision / OffCollision로 공격 시점에만 QueryAndPhysics 활성화'],
@@ -306,6 +306,24 @@ const projectDetails = {
                     ['EquipORUnEquip', '서버에서 SkeletalMeshComponent를 찾아 장착/교체/해제 처리 후 ArmorDataArray 갱신'],
                     ['UpdateArmorVisuals', '클라이언트에서 MeshPath로 SkeletalMesh를 로드하고 LeaderPoseComponent를 설정'],
                     ['해제 처리', '복제 배열에 없는 ArmorType의 Mesh를 제거해 장착 해제 상태까지 동기화']
+                ]
+            },
+            {
+                title: 'AI Sound System',
+                subtitle: 'AnimNotify와 SoundType 기반으로 AI별 사운드 재생 타이밍을 분리',
+                description: 'AI 공격, 피격, 행동 연출에서 사운드가 애니메이션 타이밍과 맞게 재생되도록 AnimNotify 기반 사운드 호출 구조를 구성했습니다. Notify에서는 사운드 종류만 전달하고, 실제 재생은 BaseAI의 PlaySound에서 처리하도록 분리해 AI별 사운드 에셋과 감쇠 설정을 관리할 수 있게 했습니다.',
+                image: 'image/Ember/image7.gif',
+                tags: [
+                    ['AnimNotify', 'CAnimNotify_AISound에서 애니메이션 Notify 타이밍에 사운드 호출'],
+                    ['SoundType', 'AISoundCategory 값을 전달해 공격, 피격 등 상황별 사운드 구분'],
+                    ['BaseAI 처리', 'Notify는 BaseAI를 가져와 PlaySound(SoundType)만 호출하도록 역할 분리'],
+                    ['위치 기반 재생', 'SpawnSoundAtLocation과 SoundAttenuation으로 AI 위치에서 사운드 재생']
+                ],
+                implementation: [
+                    ['CAnimNotify_AISound', 'MeshComp의 Owner를 ABaseAI로 캐스팅하고 SoundType을 넘겨 PlaySound 호출'],
+                    ['Null 방어', 'MeshComp 또는 AI가 nullptr인 경우 로그를 남기고 사운드 호출을 중단'],
+                    ['AISounds 배열', 'AISoundCategory 인덱스로 AI별 USoundBase 에셋을 선택'],
+                    ['SoundAttenuation', '감쇠 에셋이 없거나 사운드가 비어 있으면 재생하지 않아 런타임 오류를 방지']
                 ]
             },
             {
@@ -365,7 +383,7 @@ const projectDetails = {
                 title: '발사 및 데미지 처리 파이프라인',
                 subtitle: 'LineTrace, Projectile, Bullet Delegate, HitData, TakeDamage로 이어지는 FPS 데미지 흐름',
                 description: '발사 순간 카메라 방향 기준 LineTrace로 조준 방향과 충돌 지점을 계산하고, Muzzle에서 Bullet을 Spawn한 뒤 Bullet의 OnHit 델리게이트를 ACWeapon::OnBullet에 연결했습니다. 최종 데미지는 FHitData::SnedDamage를 통해 TakeDamage로 전달됩니다.',
-                image: 'image/Symbio/image8.png',
+                image: 'image/Symbio/image10.png',
                 tags: [
                     ['LineTrace', '카메라 ForwardVector 기준으로 조준 방향과 HitResult 계산'],
                     ['Projectile', 'Muzzle_Bullet 위치에서 Bullet Spawn 후 Shoot(direction)으로 발사'],
@@ -383,7 +401,7 @@ const projectDetails = {
                 title: 'Aim / Recoil / 카메라 연출',
                 subtitle: 'Timeline + Curve 기반 FOV 보간과 반동, 카메라 쉐이크, 데칼/파티클 연출',
                 description: '조준 시 SpringArm과 Camera 값을 저장/복구하고 Timeline Curve로 FOV를 보간했습니다. 발사 시에는 RecoilAngle로 탄 퍼짐을 만들고, AddControllerPitchInput과 CameraShake로 FPS 전투 피드백을 강화했습니다.',
-                image: 'image/Symbio/image9.png',
+                image: 'image/Symbio/image-5.png',
                 tags: [
                     ['Aim', 'AimData/BaseData로 SpringArm 길이, SocketOffset, FOV 상태 관리'],
                     ['Timeline', 'AimCurve를 UTimelineComponent에 연결해 조준 전환 보간'],
