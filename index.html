@@ -1,378 +1,594 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>클라이언트 개발자 포트폴리오</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>한경식 · Developer</title>
+<meta name="description" content="한경식 — Developer">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" as="style" crossorigin
+  href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#0b0d13;
+    --surface:#171b26;
+    --ink:#eef0f6;
+    --ink-dim:#9aa0b4;
+    --line:rgba(238,240,246,0.1);
+    --accent:#00c9a7;
+    --accent-2:#7c6bf0;
+    --accent-ink:#04120f;
+    --radius:12px;
+    --font-display:'Space Grotesk', 'Pretendard Variable', sans-serif;
+    --font-body:'Pretendard Variable', 'Space Grotesk', sans-serif;
+    --font-mono:'JetBrains Mono', monospace;
+    color-scheme: dark;
+  }
+  html[data-theme="light"]{
+    --bg:#f7f6f2;
+    --surface:#ffffff;
+    --ink:#14161c;
+    --ink-dim:#63677a;
+    --line:rgba(20,22,28,0.1);
+    --accent:#00a189;
+    --accent-2:#5b46e0;
+    --accent-ink:#ffffff;
+    color-scheme: light;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg); color:var(--ink); font-family:var(--font-body);
+    line-height:1.55; -webkit-font-smoothing:antialiased;
+    transition:background .3s ease, color .3s ease;
+  }
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1040px; margin:0 auto; padding:0 28px;}
+  .eyebrow{font-family:var(--font-mono); font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent);}
+  ::selection{background:var(--accent); color:var(--accent-ink);}
+  :focus-visible{outline:2px solid var(--accent); outline-offset:3px;}
+
+  header.site-nav{
+    position:sticky; top:0; z-index:50;
+    background:color-mix(in srgb, var(--bg) 85%, transparent);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{display:flex; align-items:center; justify-content:space-between; height:60px;}
+  .brand{font-family:var(--font-display); font-weight:700; font-size:17px;}
+  .brand span{color:var(--accent);}
+  nav.links{display:flex; gap:24px; align-items:center;}
+  nav.links a, nav.links button.linklike{
+    font-size:14px; color:var(--ink-dim); transition:color .2s;
+    background:none; border:none; cursor:pointer; font-family:var(--font-body); padding:0;
+  }
+  nav.links a:hover, nav.links button.linklike:hover{color:var(--ink);}
+  .theme-btn{
+    width:36px; height:36px; border-radius:999px; border:1px solid var(--line); background:var(--surface);
+    display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--ink);
+  }
+  .theme-btn svg{width:17px; height:17px;}
+  .icon-sun{display:none;}
+  html[data-theme="light"] .icon-moon{display:none;}
+  html[data-theme="light"] .icon-sun{display:block;}
+  @media (max-width:760px){ nav.links a, nav.links button.linklike{display:none;} }
+
+  .hero{min-height:80svh; display:flex; flex-direction:column; justify-content:center; padding:60px 0 76px;}
+  .hero-grid{display:grid; grid-template-columns:1fr auto; gap:36px; align-items:center;}
+  .hero-photo{
+    width:280px; height:370px; object-fit:cover; border-radius:16px; border:1px solid var(--line);
+    justify-self:end;
+  }
+  @media (max-width:820px){
+    .hero-grid{grid-template-columns:1fr; gap:32px;}
+    .hero-photo{width:220px; height:290px; justify-self:start; order:-1;}
+  }
+  .hero-role{font-family:var(--font-mono); font-size:13px; color:var(--ink-dim); letter-spacing:.04em; margin-bottom:20px;}
+  h1.hero-name{font-family:var(--font-display); font-weight:700; font-size:clamp(42px,8vw,88px); line-height:1.02; letter-spacing:-0.01em;}
+  .hero-name-en{
+    display:inline-block; margin-top:10px; font-size:clamp(15px,2vw,18px); font-weight:500;
+    letter-spacing:.14em; color:var(--accent); font-family:var(--font-mono);
+  }
+  .hero-tag{margin-top:22px; max-width:540px; font-size:clamp(15px,2vw,18px); color:var(--ink-dim);}
+  .hero-tag-name{font-weight:700; color:var(--accent);}
+  .hero-cta{display:flex; gap:10px; margin-top:32px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--font-body); font-weight:600; font-size:13.5px; padding:11px 17px;
+    border-radius:999px; display:inline-flex; align-items:center; gap:8px; border:1px solid var(--line);
+    transition:border-color .18s ease, background .18s ease; cursor:pointer;
+  }
+  .btn-solid{background:var(--accent); color:var(--accent-ink); border-color:var(--accent);}
+  .btn-ghost{background:transparent; color:var(--ink);}
+  .btn-ghost:hover{border-color:var(--accent);}
+  .hero-tools{margin-top:44px; display:flex; gap:8px; flex-wrap:wrap;}
+  .pill{font-family:var(--font-mono); font-size:11.5px; padding:6px 12px; border:1px solid var(--line); border-radius:999px; color:var(--ink-dim);}
+
+  section{padding:84px 0; border-top:1px solid var(--line);}
+  .section-head{display:flex; align-items:baseline; justify-content:space-between; gap:24px; margin-bottom:40px; flex-wrap:wrap;}
+  h2.section-title{font-family:var(--font-display); font-size:clamp(26px,3.6vw,36px); font-weight:700;}
+  .section-note{font-size:13.5px; color:var(--ink-dim); max-width:340px;}
+
+  .ea-grid{display:grid; grid-template-columns:1fr 1fr; gap:48px;}
+  @media (max-width:760px){ .ea-grid{grid-template-columns:1fr;} }
+  .ea-item{padding:18px 0; border-bottom:1px solid var(--line);}
+  .ea-item:first-child{padding-top:0;}
+  .ea-title{font-weight:600; font-size:15.5px; margin-bottom:4px;}
+  .ea-meta{font-family:var(--font-mono); font-size:12.5px; color:var(--accent); margin-bottom:6px;}
+  .ea-desc{color:var(--ink-dim); font-size:13px; line-height:1.5;}
+  .cert-link{
+    background:none; border:none; padding:0; font-family:var(--font-body); font-size:13px;
+    color:var(--accent); font-weight:600; cursor:pointer;
+  }
+  .cert-link:hover{text-decoration:underline;}
+  .ext-link{font-family:var(--font-body); font-size:13px; color:var(--accent); font-weight:600;}
+  .ext-link:hover{text-decoration:underline;}
+
+  .timeline{border-top:1px solid var(--line);}
+  .tl-item{display:grid; grid-template-columns:140px 1fr; gap:20px; padding:22px 0; border-bottom:1px solid var(--line);}
+  @media (max-width:640px){ .tl-item{grid-template-columns:1fr;} }
+  .tl-date{font-family:var(--font-mono); font-size:12.5px; color:var(--accent);}
+  .tl-title{font-weight:600; font-size:15.5px; margin-bottom:5px;}
+  .tl-desc{color:var(--ink-dim); font-size:13.5px;}
+
+  .filter-row{display:flex; gap:8px; margin-bottom:34px; flex-wrap:wrap;}
+  .filter-btn{
+    font-family:var(--font-mono); font-size:12px; padding:7px 14px; border-radius:999px;
+    border:1px solid var(--line); background:transparent; color:var(--ink-dim); cursor:pointer; transition:all .16s;
+  }
+  .filter-btn.active{background:var(--ink); color:var(--bg); border-color:var(--ink);}
+  html[data-theme="light"] .filter-btn.active{background:var(--ink); color:var(--surface);}
+
+  .proj-grid{display:grid; grid-template-columns:repeat(2, 1fr); gap:16px;}
+  @media (max-width:760px){ .proj-grid{grid-template-columns:1fr;} }
+  .proj-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    padding:22px; display:flex; flex-direction:column; gap:12px; min-height:170px;
+    transition:border-color .18s;
+  }
+  .proj-card:hover{border-color:var(--accent);}
+  .proj-card.featured{grid-column:span 2;}
+  @media (max-width:760px){ .proj-card.featured{grid-column:span 1;} }
+  .proj-top{display:flex; justify-content:flex-end; align-items:flex-start; gap:12px;}
+  .proj-tags{display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end;}
+  .tag{font-family:var(--font-mono); font-size:10px; padding:4px 8px; border-radius:999px; border:1px solid var(--line); color:var(--ink-dim);}
+  .proj-name{font-family:var(--font-display); font-size:18px; font-weight:700;}
+  .proj-desc{color:var(--ink-dim); font-size:13.5px; flex:1;}
+  .proj-desc-list{color:var(--ink-dim); font-size:13.5px; line-height:1.5; padding-left:18px; margin-top:-4px;}
+  .proj-subtitle{font-weight:600; font-size:14px; margin-top:2px;}
+  .proj-thumb{
+    width:100%; height:170px; object-fit:contain; object-position:center;
+    background:color-mix(in srgb, var(--surface) 60%, black 10%);
+    border-radius:8px; margin-bottom:2px;
+  }
+  .proj-card.featured .proj-thumb{height:320px;}
+  @media (max-width:760px){ .proj-card.featured .proj-thumb{height:220px;} }
+
+  .contact{text-align:center; padding:80px 0;}
+  .contact-links{display:flex; justify-content:center; gap:12px; margin-top:22px; flex-wrap:wrap;}
+
+  footer{border-top:1px solid var(--line); padding:24px 0; display:flex; justify-content:space-between; font-size:12px; color:var(--ink-dim); flex-wrap:wrap; gap:8px;}
+
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(6,7,10,0.6); backdrop-filter:blur(4px);
+    display:none; align-items:center; justify-content:center; z-index:100; padding:24px;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal-box{
+    background:var(--surface); border:1px solid var(--line); border-radius:16px;
+    max-width:640px; width:100%; max-height:82vh; overflow-y:auto; padding:36px;
+    position:relative;
+  }
+  .modal-close{
+    position:absolute; top:18px; right:18px; width:32px; height:32px; border-radius:999px;
+    border:1px solid var(--line); background:transparent; color:var(--ink); cursor:pointer;
+    display:flex; align-items:center; justify-content:center; font-size:16px;
+  }
+  .modal-box h3{font-family:var(--font-display); font-size:22px; margin-bottom:18px;}
+  .modal-box h4{font-family:var(--font-display); font-size:16px; margin:28px 0 12px; color:var(--accent);}
+  .modal-box p{font-size:14.5px; color:var(--ink-dim); margin-bottom:14px;}
+  .modal-box p strong{color:var(--ink); font-weight:600;}
+  .modal-box img.about-photo{width:100%; border-radius:10px; margin:6px 0 18px; display:block;}
+  .cert-box{max-width:720px;}
+  .cert-box img{width:100%; border-radius:8px; display:block;}
+  .cert-box iframe{width:100%; height:70vh; border:none; border-radius:8px; background:#fff;}
+  .cert-box.video-box{max-width:1180px;}
+  .cert-box.video-box .video-wrap{position:relative; width:100%; aspect-ratio:16/9; border-radius:8px; overflow:hidden; background:#000;}
+  .cert-box.video-box .video-wrap iframe,
+  .cert-box.video-box .video-wrap video{position:absolute; inset:0; width:100%; height:100%; border:none; border-radius:8px;}
+</style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <a href="#home">한경식</a>
-            </div>
-            <ul class="nav-menu">
-                <li class="nav-item"><a href="#home" class="nav-link">홈</a></li>
-                <li class="nav-item"><a href="#about" class="nav-link">소개</a></li>
-                <li class="nav-item"><a href="#projects" class="nav-link">프로젝트</a></li>
-                <li class="nav-item"><a href="#skills" class="nav-link">기술스택</a></li>
-                <li class="nav-item"><a href="#awards" class="nav-link">기타</a></li>
-                <li class="nav-item"><a href="#contact" class="nav-link">연락처</a></li>
-            </ul>
-            <div class="nav-toggle" aria-label="메뉴 열기" role="button" tabindex="0">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
+
+<header class="site-nav">
+  <div class="wrap nav-row">
+    <a class="brand" href="#top">한경식</a>
+    <nav class="links">
+      <button type="button" class="linklike" id="aboutMeBtn">About Me</button>
+      <a href="#education">Education / Awards</a>
+      <a href="#career">Career</a>
+      <a href="#activities">Activities</a>
+      <a href="#projects">Projects</a>
+      <button class="theme-btn" id="themeToggle" aria-label="테마 전환">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
     </nav>
+  </div>
+</header>
 
-    <section id="home" class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
-                <h1 class="hero-title">C++ Programmer</h1>
-                <h2 class="hero-name">한경식</h2>
-                <p class="hero-description">
-                    C++과 Unreal을 활용한 게임 클라이언트 개발 포트폴리오입니다.<br>
-                    UE5 기반 Action RPG / FPS / Survival Action 프로젝트에서 Combat, AI, Weapon, UI 시스템 등을 직접 설계·구현했습니다.<br>
-                    AI 동작 정지 버그와 프레임 저하 문제를 분석해 구조를 개선하며 게임 플레이 안정성과 성능을 향상시킨 경험이 있습니다.<br>
-                    복잡한 시스템의 원인을 추적하고 근본적으로 해결하는 문제 해결 역량을 강점으로 가지고 있습니다.<br>
-                </p>
-                <div class="hero-buttons">
-                    <a href="#projects" class="btn btn-primary">프로젝트 보기</a>
-                    <a href="https://gksrudtlr2.tistory.com" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">기술 블로그</a>
-                    <a href="https://youtube.com/playlist?list=PLJCS8PHKU4Fs0a8vg6jrvBoDdbupy-IcX&si=_2LAI3kGl3ICGK0K" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">작업 영상</a>
-                </div>
-            </div>
-            <div class="hero-image">
-                <img src="image/web2.jpg" alt="프로필 사진" class="profile-picture">
-            </div>
+<main id="top">
+  <section class="hero" style="border-top:none;">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <div class="hero-role">DEVELOPER — SUN MOON UNIVERSITY, MECHANICAL ICT CONVERGENCE ENGINEERING, INFORMATION COMMUNICATION &amp; DISPLAY ENGINEERING</div>
+          <h1 class="hero-name">한경식<br><span class="hero-name-en">HAN GYUNGSIK</span></h1>
+          <p class="hero-tag">직접 만들면서 배우는 개발자 <span class="hero-tag-name">한경식</span>입니다.</p>
+          <div class="hero-cta">
+            <button type="button" class="btn btn-solid" id="aboutMeBtn2">About Me</button>
+            <a class="btn btn-ghost" href="#projects">View Projects</a>
+            <a class="btn btn-ghost" href="mailto:gksrudtlr2@gmail.com">gksrudtlr2@gmail.com</a>
+            <a class="btn btn-ghost" href="https://github.com/GyungSikHan" target="_blank" rel="noopener">GitHub</a>
+            <a class="btn btn-ghost" href="https://gksrudtlr2.tistory.com/" target="_blank" rel="noopener">기술 블로그</a>
+          </div>
+          <div class="hero-tools">
+            <span class="pill">Unreal Engine</span><span class="pill">C++</span>
+            <span class="pill">C#</span><span class="pill">OpenCV</span><!--<span class="pill">DirectX11</span><span class="pill">Unity</span>-->
+          </div>
         </div>
-    </section>
-
-    <section id="about" class="about">
-        <div class="container">
-            <h2 class="section-title">소개</h2>
-            <div class="about-content about-grid">
-                <div class="about-text">
-                    <h3>플레이 흐름을 구조적으로 설계하는 개발자</h3>
-                    <p>
-                        게임 클라이언트 개발에서 플레이어가 직접 체감하는 전투, AI, 무기, UI 시스템에 관심을 가지고 있습니다.
-                        단순히 기능을 구현하는 것보다, 기능들이 어떤 흐름으로 연결되고 문제가 생겼을 때 어디서 원인을 찾아야 하는지를 중요하게 생각합니다.
-                    </p>
-                    <p>
-                        개인 프로젝트에서는 전투와 AI, 무기별 스킬, 컷씬 흐름을 직접 설계하며 게임 시스템 전반을 경험했고,
-                        팀 프로젝트에서는 Weapon 시스템, AI 전투 구조, Game Manager처럼 프로젝트의 핵심 흐름을 연결하는 역할을 맡았습니다.
-                    </p>
-                    <p>
-                        앞으로도 코드 구조와 플레이 경험을 함께 고민하며, 팀 안에서 맡은 기능을 끝까지 책임지고 완성하는 개발자로 성장하고자 합니다.
-                    </p>
-                </div>
-                <div class="about-highlights">
-                    <div class="highlight-item">
-                        <h4>학력 및 전공</h4>
-                        <p class="major">선문대학교 기계ICT융합공학부</p>
-                        <p class="minor">정보통신.디스플레이공학 학과</p>
-                    </div>
-                    <div class="highlight-item">
-                        <h4>경력</h4>
-                        <p class="major">(주)엠젠 |  MFC 기반 측정 장비 프로그램 유지보수 및 C++ DLL 연동 개발</p>
-                        <p class="minor">기존 MFC 측정 프로그램 유지보수 및 샘플 측정 데이터를 분석<br> 
-                            신규 C# 프로젝트에서 C++ DLL 연동, 레이저·카메라 장비 제어<br>
-                            PCB 범프 검출 및 바코드 인식 기능 개발</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="projects" class="projects">
-        <div class="container">
-            <h2 class="section-title">프로젝트</h2>
-            <div class="projects-grid">
-                <div class="project-card" onclick="openModal('Solo')">
-                    <div class="project-overlay">
-                        <p class="overlay-text">Unreal 개인 프로젝트<br>상세 설명 보기</p>
-                    </div>
-                    <div class="project-header">
-                        <div class="project-icon">🌸</div>
-                        <div class="project-title-section">
-                            <h3 class="project-title">Blossom Of Shadow</h3>
-                            <p class="project-subtitle">Unreal 개인 프로젝트</p>
-                        </div>
-                        <div class="project-status">
-                            <span class="status-badge">완성</span>
-                        </div>
-                    </div>
-                    <div class="project-description">
-                        <p>3인칭 Action RPG 프로젝트</p>
-                        <ul class="project-features">
-                            <li>1인 개발로 전투, AI, 무기, UI 시스템 등 전반의 구조 설계 및 구현</li>
-                            <li>Combat/Weapon 시스템 구현(무기 장착, 기본 콤보, 공중 콤보, 패링 판정)</li>
-                            <li>무기별 스킬 시스템 설계(Aura, BlackHole, Meteor, AirCombo 등)</li>
-                            <li>Behavior Tree 기반 Boss/Team AI 구현</li>
-                            <li>Level Sequence 기반 Portal/Cinematic 컷씬 및 Boss UI 연동</li>
-                        </ul>
-                    </div>
-                    <div class="project-tech">
-                        <span class="tech-tag">C++</span>
-                        <span class="tech-tag">Unreal</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/GyungSikHan/BlossomOfShadow" class="btn btn-secondary" onclick="event.stopPropagation()">GitHub</a>
-                    </div>
-                </div>
-
-                <div class="project-card" onclick="openModal('FinalTeam')">
-                    <div class="project-overlay">
-                        <p class="overlay-text">Unreal 팀 프로젝트<br>상세 설명 보기</p>
-                    </div>
-                    <div class="project-header">
-                        <div class="project-icon">🔥</div>
-                        <div class="project-title-section">
-                            <h3 class="project-title"> EMBER: The Eternal Blizzard</h3>
-                            <p class="project-subtitle">Unreal 팀 프로젝트 / 6인</p>
-                        </div>
-                        <div class="project-status">
-                            <span class="status-badge">완성</span>
-                        </div>
-                    </div>
-                    <div class="project-description">
-                        <p>Survival Action 프로젝트</p>
-                        <ul class="project-features">
-                            <li>AI 전투 시스템 설계 및 구현(Combat / Weapon / Damage / Sound 분리)</li>
-                            <li>Behavior Tree 기반 Dragon AI 공격 로직 구현</li>
-                            <li>FDamageData 기반 데이터형 Damage 시스템 구현</li>
-                            <li>AI Weapon 충돌 판정 및 중복 타격 방지 처리</li>
-                            <li>ArmorComponent 기반 방어구 장착 Replication 동기화</li>
-                            <li>Main UI 에셋과 GameMode / GameInstance 진입 흐름 연동</li>
-                        </ul>
-                    </div>
-                    <div class="project-tech">
-                        <span class="tech-tag">C++</span>
-                        <span class="tech-tag">Unreal</span>
-                        <span class="tech-tag">Github</span>
-                        <span class="tech-tag">Slack</span>
-                        <span class="tech-tag">Notion</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/GyungSikHan/1st-Team4-Final-Project" class="btn btn-secondary" onclick="event.stopPropagation()">GitHub</a>
-                    </div>
-                </div>
-
-                 <div class="project-card" onclick="openModal('SecondTeam')">
-                    <div class="project-overlay">
-                        <p class="overlay-text">Unreal 팀 프로젝트<br>상세 설명 보기</p>
-                    </div>
-                    <div class="project-header">
-                        <div class="project-icon">🔫</div>
-                        <div class="project-title-section">
-                            <h3 class="project-title"> SYMBIO Project</h3>
-                            <p class="project-subtitle">Unreal 팀 프로젝트 / 4인</p>
-                        </div>
-                        <div class="project-status">
-                            <span class="status-badge">완성</span>
-                        </div>
-                    </div>
-                    <div class="project-description">
-                        <p>FPS</p>
-                        <ul class="project-features">
-                            <li>Weapon Base + Component 구조 설계</li>
-                            <li>발사 및 데미지 처리 파이프라인 구현</li>
-                            <li>Aim / Recoil / 카메라 연출 구현</li>
-                            <li>팀장으로서 팀원의 문제 해결 지원</li>
-                        </ul>
-                    </div>
-                    <div class="project-tech">
-                        <span class="tech-tag">C++</span>
-                        <span class="tech-tag">Unreal</span>
-                        <span class="tech-tag">Github</span>
-                        <span class="tech-tag">Slack</span>
-                        <span class="tech-tag">Notion</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/GyungSikHan/1st-Team14-CH3-Project" class="btn btn-secondary" onclick="event.stopPropagation()">GitHub</a>
-                    </div>
-                </div>
-
-                <div class="project-card" onclick="openModal('FirstTeam')">
-                    <div class="project-overlay">
-                        <p class="overlay-text">C++ 팀 프로젝트<br>상세 설명 보기</p>
-                    </div>
-                    <div class="project-header">
-                        <div class="project-icon">🕹️</div>
-                        <div class="project-title-section">
-                            <h3 class="project-title"> Text RPG</h3>
-                            <p class="project-subtitle">C++ 팀 프로젝트 / 4인</p>
-                        </div>
-                        <div class="project-status">
-                            <span class="status-badge">완성</span>
-                        </div>
-                    </div>
-                    <div class="project-description">
-                        <p>Text RPG</p>
-                        <ul class="project-features">
-                            <li>Singleton 기반 Game Manager 설계</li>
-                            <li>상태 전환 기반 게임루프 구조 구현</li>
-                            <li>Console UI 출력 구조 설계</li>
-                            <li>팀원의 구현 내용을 Game Manager에 연결</li>
-                        </ul>
-                    </div>
-                    <div class="project-tech">
-                        <span class="tech-tag">C++</span>
-                        <span class="tech-tag">Github</span>
-                        <span class="tech-tag">Slack</span>
-                        <span class="tech-tag">Notion</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/GyungSikHan/Let_sDoItFirst" class="btn btn-secondary" onclick="event.stopPropagation()">GitHub</a>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section id="skills" class="skills">
-        <div class="container">
-            <h2 class="section-title">기술 스택</h2>
-            <div class="skills-content">
-                <div class="skills-category">
-                    <h3>언어</h3>
-                    <div class="skills-list">
-                        <div class="skill-item">
-                            <div class="skill-name">C++</div>
-                            <div class="skill-level">
-                                <div class="skill-bar" data-level="90"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="skills-category">
-                    <h3>Graphics</h3>
-                    <div class="skills-list">
-                        <div class="skill-item">
-                            <div class="skill-name">DirectX11 / DirectX9</div>
-                            <div class="skill-level">
-                                <div class="skill-bar" data-level="20"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="skills-category">
-                    <h3>Engine & Tools</h3>
-                    <div class="skills-list">
-                        <div class="skill-item">
-                            <div class="skill-name">Unreal</div>
-                            <div class="skill-level">
-                                <div class="skill-bar" data-level="70"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">Open CV</div>
-                            <div class="skill-level">
-                                <div class="skill-bar" data-level="20"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="awards" class="awards">
-        <div class="container">
-            <h2 class="section-title">기타</h2>
-            <div class="awards-grid">
-                <div class="awards-category">
-                    <h3>수상 내역</h3>
-                    <div class="award-item">
-                        <h4>4차 산업혁명 인재양성 연합 페스티벌 공모전 [우수상]</h4>
-                        <p class="award-meta">창업 아이디어 부문: 다목적 자율주행 비행 드론 아이디어</p>
-                    </div>
-                </div>
-
-                <div class="awards-category">
-                    <h3>자격증</h3>
-                    <div class="award-item">
-                        <h4>컴퓨터 활용능력 2급</h4>
-                        <p class="award-meta">대한상공회의소</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title">연락처</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>문의</h3>
-                    <p>기술 관련 문의 또는 협업 제안 환영</p>
-                    <div class="contact-methods">
-                        <div class="contact-method">
-                            <i class="icon-email">📧</i>
-                            <div>
-                                <h4>이메일</h4>
-                                <p>gksrudtlr2@icloud.com</p>
-                            </div>
-                        </div>
-                        <div class="contact-method">
-                            <i class="icon-github">🔗</i>
-                            <div>
-                                <h4>GitHub</h4>
-                                <p>https://github.com/GyungSikHan</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="contact-form">
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <input type="text" name="name" placeholder="이름" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" name="email" placeholder="이메일" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea name="message" placeholder="메시지" rows="5" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">메시지 보내기</button>
-                        <p class="form-status" aria-live="polite"></p>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div id="projectModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button" onclick="closeModal()">&times;</span>
-            <div id="modal-details-content"></div>
-        </div>
+        <img class="hero-photo" src="images/web2.jpg" alt="한경식 프로필 사진">
+      </div>
     </div>
+  </section>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-text">
-                    <p>&copy; 2026 Portfolio. All rights reserved.</p>
-                </div>
-                <div class="footer-links">
-                    <a href="#home">홈</a>
-                    <a href="#projects">프로젝트</a>
-                    <a href="#skills">기술스택</a>
-                    <a href="#contact">연락처</a>
-                </div>
-            </div>
+  <section id="education">
+    <div class="wrap">
+      <div class="section-head">
+        <div><span class="eyebrow">EDUCATION / AWARDS</span><h2 class="section-title" style="margin-top:12px;">Education / Awards</h2></div>
+      </div>
+      <div class="ea-grid">
+        <div>
+          <div class="eyebrow" style="margin-bottom:14px;">Education</div>
+          <div class="ea-item">
+            <div class="ea-title">방송통신대학교 - 컴퓨터과학과</div>
+            <div class="ea-meta">26.08 - Present</div>
+            <!-- <div class="ea-desc"><button type="button" class="cert-link" data-src="certs/award-deanslist-2024-2.pdf" data-type="pdf" data-title="Dean's List — 2024학년도 2학기">2024-2 인증서 ↗</button> · <button type="button" class="cert-link" data-src="certs/award-deanslist-2025-2.pdf" data-type="pdf" data-title="Dean's List — 2025학년도 2학기">2025-2 인증서 ↗</button> · <span style="opacity:.6;">2026-1 인증서 발급 예정</span></div> -->
+          </div>
+          <div class="ea-item">
+            <div class="ea-title">선문대학교 - 기계ICT융합공학부 정보통신-디스플레이공학</div>
+            <div class="ea-meta">2016.03 — 2023.02 (졸업)</div>
+            <div class="ea-desc">Relevant Coursework: C언어, C언어 고급, CT와SW의이해, 인포메카트로닉스 입문, 디지털회로, 디지털회로실험, 전자회로</div>
+          </div>
         </div>
-    </footer>
+        <div>
+          <div class="eyebrow" style="margin-bottom:14px;">Awards</div>
+          <div class="ea-item">
+            <div class="ea-title">4차 산업혁명 인재양성 연합 페스티벌 공모전 창업 아이디어 부문</div>
+            <div class="ea-meta">우수상 (팀원: 한경식, 신완철)</div>
+            <div class="ea-desc">한국정보통신보안윤리학회 주최. 다목적 자율주행 비행 드론 아이디어로 수상.</div>
+            <div class="ea-desc"><button type="button" class="cert-link" data-src="images/창업아이디어_우수상.pdf" data-type="pdf" data-title="2021 제5회 4차 산업혁명 인재양성 연합 페스티벌 · 창업 아이디어 부문 우수상">상장 ↗</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <script src="script.js?v=20260603"></script>
+  <section id="career">
+    <div class="wrap">
+      <div class="section-head">
+        <div><span class="eyebrow">CAREER</span><h2 class="section-title" style="margin-top:12px;">Career</h2></div>
+      </div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-date">2025.12.29 — Present</div>
+          <div>
+            <div class="tl-title">(주) 엠젠 - SW 개발자</div>
+            <div class="tl-desc"> 신규 C# 프로젝트와의 C++ DLL 연동 개발을 담당. 기존 장비 프로그램의 기능 수정 및 샘플 측정 데이터 분석, 기존 MFC 기반 측정 장비 프로그램 유지보수. </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="activities">
+    <div class="wrap">
+      <div class="section-head">
+        <div><span class="eyebrow">ACTIVITIES</span><h2 class="section-title" style="margin-top:12px;">Activities</h2></div>
+      </div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-date">2018.09 — 2018.11</div>
+          <div>
+            <div class="tl-title">선문대학교 ICT 융합단 스터디 소그룹</div>
+            <div class="tl-desc">교내활동. 영어 공부를 중심으로 ICT 융합 분야 학습 스터디에 참여.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">2018.06 - 2018.06</div>
+          <div>
+            <div class="tl-title">씽긋 사회활동</div>
+            <div class="tl-desc">2018 디스플레이 챌린지 신제품 부문. 플렉시블 디스플레이를 이용한 현수막 제작 아이디어 출품.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">2018.06 - 2018.06</div>
+          <div>
+            <div class="tl-title">선문대학교 교내활동</div>
+            <div class="tl-desc">웨어러블 디스플레이(스트레인게이지) 관련 활동 참여.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">2016.03 — 2018.12</div>
+          <div>
+            <div class="tl-title">선문대학교 농구동아리</div>
+            <div class="tl-desc">교내 농구동아리 활동. 2018년 동아리 회장을 맡아 팀 운영과 활동 관리를 담당.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <div class="section-head">
+        <div><span class="eyebrow">PROJECTS</span><h2 class="section-title" style="margin-top:12px;">Projects</h2></div>
+      </div>
+
+      <div class="filter-row">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="featured">Featured</button>
+        <button class="filter-btn" data-filter="team">Team</button>
+        <button class="filter-btn" data-filter="personal">Personal</button>
+      </div>
+
+      <div class="proj-grid" id="projGrid">
+
+        <article class="proj-card" data-cat="personal">
+          <img class="proj-thumb" src="images/c++.png" alt="C/C++ 로고">
+          <div class="proj-top"><div class="proj-tags"><span class="tag">C++</span><span class="tag">Personal</span></div></div>
+          <div class="proj-name">C / C++</div>
+          <p class="proj-desc">인터넷 검색이나 AI 도움 없이, 자료구조와 알고리즘을 직접 코드로 짜보는 연습 기록</p>
+          <div style="display:flex; gap:14px; flex-wrap:wrap;">
+            <a class="ext-link" href="https://github.com/GyungSikHan/C-_Revision" target="_blank" rel="noopener">GitHub ↗</a>
+          </div>
+        </article>
+
+        <article class="proj-card" data-cat="featured personal">
+          <img class="proj-thumb" src="images/BlossomOfShadow/mqdefault.png" alt="BlossomOfShadow">
+          <div class="proj-top"><div class="proj-tags"><span class="tag">Unreal 5.5.4</span><span class="tag">Personal</span></div></div>
+          <div class="proj-name">BlossomOfShadow</div>
+          <p class="proj-desc">Unreal Engine 5.4 기반으로 구현한 3D 액션/전투 중심 포트폴리오로 게임 클라이언트 개발 전반의 이해와 엔진의 사용 법을 익히는 것을 목표로 함.</p>
+          <div class="proj-subtitle">주요 기능 및 기여</div>
+          <ul class="proj-desc-list">
+            <li>1인 개발로 전투, AI, 무기, UI 시스템 등 전반의 구조 설계 및 구현</li>
+            <li>Combat/Weapon 시스템 구현: 무기 장착, 기본 콤보, 공중 콤보, 패링 판정 로직</li>
+            <li>무기별 스킬 시스템 설계: CSkills 기반 Aura, BlackHole, Meteor, AirCombo 등 구현</li>
+            <li>Behavior Tree 기반 Boss/Team AI 구현: Perception, Blackboard, Team ID, Boss Attack Task</li>
+            <li>Level Sequence를 활용한 Portal/Cinematic 컷씬과 Boss UI 연동</li>
+          </ul>
+          <div style="display:flex; gap:14px; flex-wrap:wrap;">
+            <a class="ext-link" href="https://github.com/GyungSikHan/BlossomOfShadow" target="_blank" rel="noopener">GitHub ↗</a>
+            <a class="ext-link" href="https://drive.google.com/file/d/1LRnWCWV3obmQORMKDY8yV8YeIxzddGuA/view?usp=sharing" target="_blank" rel="noopener">최신 버전 다운로드 ↗</a>
+            <button type="button" class="cert-link" data-src="sI_5kmsh7MY" data-type="youtube" data-title="Symbio Project · 시연 영상">시연 영상 ↗</button>
+          </div>
+        </article>
+
+        <article class="proj-card" data-cat="featured team">
+          <img class="proj-thumb" src="images/Symbio/image.png" alt="Symbio 게임 스크린샷">
+          <div class="proj-top"><div class="proj-tags"><span class="tag">Unreal 5.5.4</span><span class="tag">Team</span></div></div>
+          <div class="proj-name">Symbio Project</div>
+          <p class="proj-desc">Unreal Engine 5.5 기반 4인 팀 FPS 프로젝트로 Weapon Base와 Component 구조를 중심으로 무기 장착, 조준, 발사, 데미지 처리, 카메라 연출 흐름을 설계 및 구현</p>
+          <div class="proj-subtitle">주요 기능 및 기여</div>
+          <ul class="proj-desc-list">
+            <li>Weapon Base + Component 구조 설계</li>
+            <li>LineTrace + Projectile + Delegate 기반 발사 및 데미지 처리 파이프라인 구현</li>
+            <li>Timeline + Curve 기반 Aim, Recoil, Camera Shake, 데칼/파티클 연출 구현
+            <li>팀장으로서 몽타주 상태 복구, 수류탄 투척, 팀원 스킬 충돌 문제 해결 지원</li>
+          </ul>
+          <div style="display:flex; gap:14px; flex-wrap:wrap;">
+            <a class="ext-link" href="https://github.com/GyungSikHan/1st-Team14-CH3-Project" target="_blank" rel="noopener">GitHub ↗</a>
+            <a class="ext-link" href="https://drive.google.com/file/d/1wuGg5KNYLVXD0ZXs_h4th62TAfnBNP6L/view?usp=sharing" target="_blank" rel="noopener">최신 버전 다운로드 ↗</a>
+            <a class="ext-link" href="https://app.notion.com/p/1-14-aaa6365cac3f83dc9acf01f918c09879?source=copy_link" target="_blank" rel="noopener">노션 ↗</a>
+            <button type="button" class="cert-link" data-src="tJcozATuAgQ" data-type="youtube" data-title="Symbio Project · 시연 영상">시연 영상 ↗</button>
+          </div>
+        </article>
+
+        <article class="proj-card" data-cat="team">
+          <img class="proj-thumb" src="images/Ember/image.png" alt="EMBER 게임 스크린샷">
+          <div class="proj-top"><div class="proj-tags"><span class="tag">Unreal 5.5.4</span><span class="tag">Team</span></div></div>
+          <div class="proj-name">EMBER : The Eternal Blizzard</div>
+          <p class="proj-desc">Unreal Engine 5.5 기반 6인 팀 Survival Action 프로젝트로 AI 전투 시스템, 방어구 장착 Replication, Main UI 진입 흐름을 중심으로 구현</p>
+          <div class="proj-subtitle">주요 기능 및 기여</div>
+          <ul class="proj-desc-list">
+            <li>AI 전투 시스템 설계 및 구현: Combat / Weapon / Damage / Sound 로직 분리</li>
+            <li>Behavior Tree 기반 Dragon AI 공격 로직 구현: InProgress + FinishLatentTask로 상태 정지 문제 해결</li>
+            <li>FDamageData 기반 데이터형 Damage 시스템과 AI Weapon 충돌 판정 구현</li>
+            <li>ArmorComponent 기반 플레이어 방어구 장착 및 Replication 동기화 구현</li>
+            <li>Main UI 에셋과 GameMode / GameInstance 기반 게임 진입 흐름 연동</li>
+          </ul>
+          <div style="display:flex; gap:14px; flex-wrap:wrap;">
+            <a class="ext-link" href="https://github.com/GyungSikHan/1st-Team4-Final-Project" target="_blank" rel="noopener">GitHub ↗</a>
+            <a class="ext-link" href="https://drive.google.com/file/d/1PpsPOJKj8707m6JqEeOPmhDDgPz4zifB/view?usp=sharing" target="_blank" rel="noopener">최신 버전 다운로드 ↗</a>
+            <a class="ext-link" href="https://app.notion.com/p/Studio-e786365cac3f83e788c9812378c162d5?source=copy_link" target="_blank" rel="noopener">노션 ↗</a>
+            <button type="button" class="cert-link" data-src="1DuNwBaC0Xg" data-type="youtube" data-title="EMBER : The Eternal Blizzard · 시연 영상">시연 영상 ↗</button>
+            <button type="button" class="cert-link" data-src="q2ws313NTcg" data-type="youtube" data-title="EMBER : The Eternal Blizzard · 트레일러 영상">트레일러 영상 ↗</button>
+          </div>
+        </article>
+
+        <article class="proj-card" data-cat="team">
+          <img class="proj-thumb" src="images/TextRPG/image.png" alt="TextRPG 게임 스크린샷">
+          <div class="proj-top"><div class="proj-tags"><span class="tag">C++</span><span class="tag">Team</span></div></div>
+          <div class="proj-name">TextRPG</div>
+          <p class="proj-desc">C++ 콘솔 기반 Text RPG 팀 프로젝트로 Singleton 기반 Game Manager를 설계하고, 전투/상점/인벤토리/플레이어 정보 등 팀원이 구현한 기능을 하나의 게임 루프로 연결</p>
+          <div class="proj-subtitle">주요 기능 및 기여</div>
+          <ul class="proj-desc-list">
+            <li>Singleton 기반 Game Manager 설계</li>
+            <li>상태 전환 기반 게임 루프 구조 구현</li>
+            <li>전투 / 상점 / 인벤토리 / 플레이어 정보 Console UI 출력 구조 설계</li>
+            <li>Character, Monster, Shop, Item 등 팀원 구현 기능을 Game Manager에 연결</li>
+            <li>디버그 모드, 보스 진입, 사망/클리어 후 재시작 흐름 구현</li>
+          </ul>
+          <div style="display:flex; gap:14px; flex-wrap:wrap;">
+            <a class="ext-link" href="https://github.com/GyungSikHan/Let_sDoItFirst" target="_blank" rel="noopener">GitHub ↗</a>
+            <a class="ext-link" href="https://app.notion.com/p/1-8-c4a6365cac3f83b8b3480187a0bbc999?source=copy_link" target="_blank" rel="noopener">노션 ↗</a>
+            <button type="button" class="cert-link" data-src="QqcPvBTLAaA" data-type="youtube" data-title="EMBER : TextRPG · 시연 영상">시연 영상 ↗</button>
+          </div>
+        </article>
+
+        <article class="proj-card" data-cat="personal">
+          <img class="proj-thumb" src="images/JumpGame/image.png" alt="JumpGame 게임 스크린샷">
+          <div class="proj-top"><div class="proj-tags"><span class="tag">Unreal 5.5.4</span><span class="tag">C++</span><span class="tag">Personal</span></div></div>
+          <div class="proj-name">JumpGame</div>
+          <p class="proj-desc">Unreal Engine 5.5 기반 개인 프로젝트로 엔진 사용법을 익히기 위해 Blueprint로 제작한 Jump Game</p>
+          <ul class="proj-desc-list">
+            <li>Unreal Blueprint를 활용한 간단한 Jump Game</li>
+          </ul>
+          <div style="display:flex; gap:14px; flex-wrap:wrap;">
+            <a class="ext-link" href="https://drive.google.com/file/d/1_ENHwAlKtAaHlvmSbvVhLQZBWqV1XbrE/view?usp=sharing" target="_blank" rel="noopener">최신 버전 다운로드 ↗</a>
+            <button type="button" class="cert-link" data-src="1k22NfeBFZY" data-type="youtube" data-title="JumpGame · 시연 영상">시연 영상 ↗</button>
+          </div>
+        </article>
+
+    </div>
+  </section>
+
+  <section class="contact" style="border-top:1px solid var(--line);">
+    <div class="wrap">
+      <span class="eyebrow">CONTACT</span>
+      <h2 class="section-title" style="margin-top:14px;">Contact</h2>
+      <div class="contact-links">
+        <a class="btn btn-ghost" href="mailto:gksrudtlr2@gmail.com">gksrudtlr2@gmail.com</a>
+        <a class="btn btn-ghost" href="https://github.com/GyungSikHan" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:8px;">
+    <span>Designed &amp; Built by 한경식 © 2026</span>
+    <span><a href="https://github.com/GyungSikHan" target="_blank" rel="noopener">github.com/GyungSikHan</a></span>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="aboutModal">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose" aria-label="닫기">✕</button>
+    <h3>About Me</h3>
+    <!-- <p><strong>새로운 기술을 배우는 일보다, 그 기술로 원하는 결과를 만드는 일이 더 재미있는 개발자입니다.</strong></p>
+    <p>제가 개발에 관심을 갖게 된 계기는 마인크래프트라는 게임이었습니다. 게임을 플레이하는 것보다 레드스톤 회로를 만들고 명령어를 조합해서 새로운 기능을 구현하는 시간이 훨씬 즐거웠습니다. 버튼 하나를 눌렀을 뿐인데 제가 만든 장치가 의도한 대로 움직이고, 생각했던 시스템이 실제로 동작하는 모습이 신기했습니다. 그때 처음으로 '직접 만드는 일'이 정말 재미있다는 걸 느꼈고, 자연스럽게 개발을 시작하게 되었습니다.</p>
+    <p>지금도 개발하는 방식은 크게 달라지지 않았습니다. 처음 보는 기술이 나오면 겁부터 먹기보다 일단 만들어 봅니다. AI와 공식 문서를 참고해서 간단한 프로토타입을 만들고, 실행해 보면서 하나씩 고칩니다. 오류가 생기면 원인을 찾고, 해결하면 또 다음 문제를 만나는 과정이 저한테는 스트레스보다 재미에 가깝습니다. 그래서 새로운 기술을 배울 때도 공부만 오래 하기보다 직접 부딪히면서 익히는 편입니다.</p>
+    <p>개발하면서 가장 기분 좋은 순간은 제가 만든 결과물을 다른 사람이 사용했을 때입니다. 프로젝트를 여러 번 수정하면서 완성도를 높이고, "재밌다", "생각보다 퀄리티가 좋다"는 피드백을 받을 때마다 다시 개발할 힘을 얻습니다. 그래서 저는 코드를 많이 작성한 날보다, 사용자가 만족하는 결과물을 만든 날을 더 기억합니다.</p>
+
+    <img class="about-photo" src="images/about-camp-group.jpg" alt="휴먼인터페이스 디자인 실습 캠프 단체사진">
+
+    <h4>Problem Solving</h4>
+    <p><strong>문제가 생기면 답을 찾기보다, 직접 해결 방법을 만들어 보는 편입니다.</strong></p>
+    <p>NC AI VARCO Voice 공모전에서 Unity 플러그인을 만들면서 가장 크게 느꼈습니다. 제공된 API 문서는 대부분 Python 예제로 작성되어 있었지만 프로젝트는 Unity(C#) 환경에서 개발하고 있었습니다. 단순히 문법만 바꾸면 될 줄 알았지만 실제로는 요청 방식, 데이터 처리, 비동기 흐름까지 전부 다시 맞춰야 했습니다.</p>
+    <p>처음에는 AI가 알려주는 방법대로 구현했지만 제대로 동작하지 않았습니다. 그래서 접근 방식을 바꿨습니다. Python 코드가 어떤 순서로 동작하는지 먼저 분석한 뒤 요청, 응답, 음성 생성 과정을 각각 분리해서 하나씩 구현했습니다. 작은 기능이 정상적으로 동작하면 다음 단계로 넘어가는 식으로 계속 검증했습니다.</p>
+    <p>몇 번이나 처음부터 다시 만들었지만 결국 Unity 안에서 바로 사용할 수 있는 플러그인을 완성했습니다. 이 경험 이후로는 처음 보는 기술이 나와도 "못 한다"는 생각보다 "어떻게 쪼개면 만들 수 있을까?"부터 생각하게 되었습니다.</p>
+
+    <h4>Communication</h4>
+    <p><strong>좋은 협업은 말을 많이 하는 것이 아니라, 같은 그림을 보는 것이라고 생각합니다.</strong></p>
+    <p>프로젝트를 하다 보면 기획서만 보고 개발하기 어려운 경우가 많았습니다. 같은 문장을 읽어도 사람마다 생각하는 결과가 달랐고, 실제로 구현이 끝난 뒤 기획자의 의도와 전혀 다른 기능이 나온 적도 있었습니다.</p>
+    <p>그 일을 겪고 나서는 개발을 시작하기 전에 제가 이해한 내용을 다시 설명하는 습관을 만들었습니다. "이 기능이 이런 방식으로 동작하는 것이 맞나요?"를 먼저 확인했고, 애매한 부분은 간단한 프로토타입을 만들어 기획자와 함께 보면서 방향을 맞췄습니다.</p>
+    <p>기획자도 이전보다 예외 상황과 세부 동작을 자세하게 작성하기 시작했고, 큰 수정이 필요한 경우가 눈에 띄게 줄었습니다. 그 경험 이후 저는 좋은 소통은 설명을 잘하는 것보다 서로 같은 결과를 떠올리고 있는지 확인하는 과정이라고 생각하게 되었습니다.</p>
+
+    <img class="about-photo" src="images/about-teamwork.jpg" alt="팀원들과 회의하는 모습">
+
+    <h4>Resource Management</h4>
+    <p><strong>반복되는 작업을 발견하면, 사람보다 도구가 하는 것이 맞는지 먼저 생각합니다.</strong></p>
+    <p>리듬게임 프로젝트에서는 스테이지마다 노트를 하나씩 입력해야 했습니다. 개발자가 계속 데이터를 입력하는 방식은 시간이 오래 걸렸고, 기획자도 원하는 패턴을 직접 수정하기 어려웠습니다.</p>
+    <p>그래서 Unity 에디터 안에서 사용할 수 있는 비트메이커 툴을 만들었습니다. 기획자가 직접 노트를 배치하고 바로 플레이해 볼 수 있는 도구였습니다.</p>
+    <p>도구를 만든 이후에는 기획자가 직접 데이터를 만들 수 있게 되었고, 저는 반복 작업 대신 게임 시스템 개발에 집중할 수 있었습니다. 한 번 만든 도구는 이후 스테이지에서도 그대로 사용할 수 있었기 때문에 프로젝트가 진행될수록 작업 속도도 자연스럽게 빨라졌습니다.</p>
+    <p>예전에는 개발 속도를 높이는 방법만 고민했다면, 지금은 반복되는 작업 자체를 없애는 방법을 먼저 고민합니다.</p>
+
+    <h4>User Experience</h4>
+    <p><strong>기능이 완성됐다고 생각하는 순간은 코드가 끝났을 때가 아니라, 좋은 반응을 들었을 때입니다.</strong></p>
+    <p>NC AI 공모전 프로젝트에서는 컷신 연출과 구현을 맡았습니다. 이전부터 꼭 해보고 싶었던 분야였지만 제대로 만들어 본 것은 처음이었습니다. 카메라 움직임, 캐릭터 동선, 음성 타이밍까지 계속 수정하면서 조금이라도 더 자연스럽게 보이도록 여러 번 손봤습니다.</p>
+    <p>최종 발표가 끝난 뒤 "학생들이 만든 프로젝트라고 생각하지 못할 정도로 퀄리티가 좋았다."는 평가를 들었습니다. 특히 컷신 이야기가 나왔을 때 가장 기뻤습니다. 제가 직접 연출한 장면이 다른 사람에게도 그대로 전달됐다는 뜻이었기 때문입니다.</p>
+    <p>그 이후부터는 새로운 기능을 만드는 것보다 사용자가 어떻게 느끼는지를 더 많이 생각하게 되었습니다. 결국 개발은 코드를 보여주는 일이 아니라 경험을 만드는 일이라고 생각합니다.</p>
+
+    <h4>Growth</h4>
+    <p><strong>한 가지 문제에 끝까지 몰입하는 것이 제 장점이자 가장 큰 단점이었습니다.</strong></p>
+    <p>문제가 생기면 해결할 때까지 계속 붙잡고 있는 편입니다. 덕분에 어려운 오류도 많이 해결했지만, 반대로 하나의 문제에 너무 오래 시간을 쓰는 경우도 많았습니다.</p>
+    <p>이 습관을 바꾸기 위해 작업을 최대한 작은 단위로 나누기 시작했습니다. 일정 시간을 정해 놓고 작업한 뒤에는 현재 상태를 기록하고, 다음 작업으로 넘어갈지 계속 진행할지 다시 판단했습니다.</p>
+    <p>처음에는 흐름이 끊기는 것 같았지만 오히려 프로젝트 전체를 보는 시야가 생겼습니다. 지금은 문제 하나를 빨리 해결하는 것보다, 프로젝트 전체를 끝까지 완성하는 것이 더 중요하다고 생각합니다.</p> -->
+  </div>
+</div>
+
+<div class="modal-overlay" id="certModal">
+  <div class="modal-box cert-box">
+    <button class="modal-close" id="certClose" aria-label="닫기">✕</button>
+    <h3 id="certTitle"></h3>
+    <div id="certBody"></div>
+  </div>
+</div>
+
+<script>
+  const root = document.documentElement;
+  const stored = localStorage.getItem('yj-theme');
+  if(stored === 'light') root.setAttribute('data-theme', 'light');
+  document.getElementById('themeToggle').addEventListener('click', () => {
+    const isLight = root.getAttribute('data-theme') === 'light';
+    if(isLight){ root.removeAttribute('data-theme'); localStorage.setItem('yj-theme','dark'); }
+    else { root.setAttribute('data-theme','light'); localStorage.setItem('yj-theme','light'); }
+  });
+
+  const btns = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.proj-card');
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      cards.forEach(c => {
+        const cats = c.dataset.cat.split(' ');
+        c.style.display = (f === 'all' || cats.includes(f)) ? '' : 'none';
+      });
+    });
+  });
+
+  const modal = document.getElementById('aboutModal');
+  function openModal(){ modal.classList.add('open'); }
+  function closeModal(){ modal.classList.remove('open'); }
+  document.getElementById('aboutMeBtn').addEventListener('click', openModal);
+  document.getElementById('aboutMeBtn2').addEventListener('click', openModal);
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
+
+  const certModal = document.getElementById('certModal');
+  const certBox = document.querySelector('#certModal .cert-box');
+  const certTitle = document.getElementById('certTitle');
+  const certBody = document.getElementById('certBody');
+  function openCert(src, type, title){
+    certTitle.textContent = title || '인증서';
+    const isVideo = type === 'video' || type === 'youtube';
+    certBox.classList.toggle('video-box', isVideo);
+    certBody.innerHTML = type === 'pdf'
+      ? `<iframe src="${src}"></iframe>`
+      : type === 'video'
+      ? `<div class="video-wrap"><video src="${src}" controls autoplay></video></div>`
+      : type === 'youtube'
+      ? `<div class="video-wrap"><iframe src="https://www.youtube.com/embed/${src}?autoplay=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>`
+      : `<img src="${src}" alt="${title || '인증서'}">`;
+    certModal.classList.add('open');
+  }
+  function closeCert(){ certModal.classList.remove('open'); certBody.innerHTML = ''; certBox.classList.remove('video-box'); }
+  document.querySelectorAll('.cert-link').forEach(btn => {
+    btn.addEventListener('click', () => openCert(btn.dataset.src, btn.dataset.type, btn.dataset.title));
+  });
+  document.getElementById('certClose').addEventListener('click', closeCert);
+  certModal.addEventListener('click', (e) => { if(e.target === certModal) closeCert(); });
+
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape'){ closeModal(); closeCert(); }
+  });
+</script>
+
 </body>
 </html>
