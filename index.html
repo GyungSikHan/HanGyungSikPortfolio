@@ -2347,7 +2347,7 @@
     #projects .filter-row { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:28px; }
     #projects .filter-btn { border:1px solid var(--line); border-radius:999px; padding:10px 16px; background:transparent; font-size:13px; }
     #projects .filter-btn.active { color:var(--accent); border-color:var(--accent); background:color-mix(in srgb, var(--accent) 7%, transparent); }
-    #projGrid { grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; align-items:start; }
+    #projGrid { grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; align-items:stretch; }
     #projGrid > .proj-card { padding:0 24px 24px; overflow:hidden; border-radius:14px; gap:0; background:var(--surface); }
     #projGrid > .proj-card::before { display:none; }
     #projGrid > .proj-card > .proj-thumb,
@@ -2356,8 +2356,8 @@
     #projGrid .project-cover-placeholder { background:linear-gradient(135deg,var(--bg),var(--surface)); }
     #projGrid .proj-name { order:-4; font-size:20px; margin-bottom:10px; }
     #projGrid .project-meta { order:-3; font-size:12px; }
-    #projGrid > .proj-card > .proj-desc { order:-2; color:var(--ink-dim); line-height:1.75; }
-    #projGrid .proj-top { order:2; justify-content:flex-start; margin:18px 0 0; min-height:0; }
+    #projGrid > .proj-card > .proj-desc { order:-2; flex:0 0 auto; color:var(--ink-dim); line-height:1.75; }
+    #projGrid .proj-top { order:2; justify-content:flex-start; margin:0; padding-top:16px; min-height:0; }
     #projGrid .proj-tags { justify-content:flex-start; }
     #projGrid .tag { border:0; border-radius:4px; padding:4px 8px; background:color-mix(in srgb,var(--accent) 14%,var(--surface)); }
     #projGrid .tag:nth-child(even) { background:color-mix(in srgb,#ba7971 25%,var(--surface)); }
@@ -2366,7 +2366,39 @@
     #projGrid .project-details:not(.project-inline) { margin-top:12px; }
     #projGrid > .proj-card > div[style*="display:flex"],
     #projGrid > .proj-card > .project-documents { order:3; margin-top:22px !important; padding-top:18px; border-top:1px solid var(--line); }
+    #projGrid > .proj-card > .proj-desc { margin-bottom:20px; }
+    #projGrid > .proj-card > .proj-desc-list { padding-left:20px; margin:0 0 8px; line-height:1.8; }
+    #projGrid > .proj-card > .proj-desc-list li + li { margin-top:8px; }
+    #projGrid > .proj-card > div[style*="margin-top:14px"] { order:3; margin-top:22px !important; padding-top:18px; border-top:1px solid var(--line); }
+    #projGrid > .proj-card > .project-details {
+      order:3;
+      margin-top:22px;
+      padding-top:18px;
+      border-top:1px solid var(--line);
+    }
+    #projGrid > .proj-card > .project-details ~ .project-details,
+    #projGrid > .proj-card > div[style*="display:flex"] ~ .project-details,
+    #projGrid > .proj-card > div[style*="margin-top:14px"] ~ .project-details,
+    #projGrid > .proj-card > .project-documents ~ .project-details {
+      margin-top:12px;
+      padding-top:0;
+      border-top:0;
+    }
+    #projGrid > .proj-card > span[id] { display:none; }
     #projGrid .ext-link { font-weight:600; }
+    @media(min-width:1201px) {
+      #projGrid > .proj-card { padding:0 20px 22px; }
+      #projGrid > .proj-card > .proj-thumb,
+      #projGrid > .proj-card:has(details[open]) > .proj-thumb,
+      #projGrid .project-cover-placeholder { width:calc(100% + 40px); margin:0 -20px 20px; }
+      #projGrid .proj-name { font-size:18px; line-height:1.45; }
+      #projGrid > .proj-card > .proj-desc,
+      #projGrid > .proj-card > .proj-desc-list { font-size:13px; line-height:1.75; }
+      #projGrid > .proj-card > .proj-desc { margin-bottom:16px; }
+      #projGrid .project-meta { font-size:11px; }
+      #projGrid .proj-top { padding-top:16px; }
+      #projGrid .tag { font-size:10px; padding:4px 7px; }
+    }
     @media(max-width:1200px) { #projGrid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
     @media(max-width:760px) { #projGrid { grid-template-columns:1fr; } #projGrid > .proj-card { padding:0 20px 24px; } #projGrid > .proj-card > .proj-thumb, #projGrid > .proj-card:has(details[open]) > .proj-thumb, #projGrid .project-cover-placeholder { width:calc(100% + 40px); margin-left:-20px; margin-right:-20px; } }
   </style>
@@ -2560,14 +2592,10 @@
             <p class="project-meta">개인 학습 · C++ / 자료구조 / 알고리즘</p>
             <p class="proj-desc">C++ 기초 과외의 복습과 숙제 풀이를 모은 학습 저장소입니다. 자료구조와 알고리즘을 직접 코드로 표현하고, 입력과 처리 과정·결과를 비교하며 문제 해결
               과정을 기록했습니다.</p>
-            <details class="project-details project-case project-inline"><summary>프로젝트 자세히 보기</summary>
-              <h4 class="case-heading">학습 범위</h4>
-              <p class="case-text">저장소에는 자료구조와 기본 알고리즘 풀이, DFS·BFS 경로 탐색과 최소 이동 비용을 주제로 한 연습 코드가 포함되어 있습니다. 문제별 소스 파일로
-                풀이를 나누어 보관했습니다.</p>
-              <h4 class="case-heading">포트폴리오에서의 의미</h4>
-              <p class="case-text">완성된 하나의 제품보다는 게임 개발의 기반이 되는 C++ 문제 해결 연습을 보여주는 기록입니다. 구체적인 풀이와 작성 과정은 GitHub의 문제별 코드를
-                통해 확인할 수 있습니다.</p>
-            </details>
+            <ul class="proj-desc-list">
+              <li>자료구조와 기본 알고리즘 문제 풀이</li>
+              <li>DFS·BFS 경로 탐색과 최소 이동 비용 계산</li>
+            </ul>
             <div style="display:flex; gap:14px; flex-wrap:wrap;">
               <a class="ext-link" href="https://github.com/GyungSikHan/C-_Revision" target="_blank"
                 rel="noopener">GitHub ↗</a>
@@ -2583,21 +2611,11 @@
             <p class="project-meta">2024.01–2024.10 · 1인 개발 · C++ / Blueprint</p>
             <p class="proj-desc">적과 전투하며 포탈을 통해 다음 공간으로 이동하는 3D 액션 RPG입니다. 언리얼 엔진으로 하나의 게임을 처음부터 끝까지 완성하는 것을 목표로,
               전투·무기·스킬·AI·UI와 시네마틱을 직접 연결했습니다.</p>
-            <details class="project-details project-case project-inline"><summary>프로젝트 자세히 보기</summary>
-              <h4 class="case-heading">담당 역할과 설계</h4>
-              <p class="case-text">캐릭터의 공격·피격·사망 흐름과 무기 장착, 기본 콤보·공중 콤보·패링을 구현했습니다. 무기와 스킬을 시스템 단위로 나누고 CSkills를 기반으로
-                Aura·BlackHole·Meteor·AirCombo를 구성해, 개별 스킬의 동작을 분리했습니다.</p>
-              <h4 class="case-heading">AI와 게임 진행</h4>
-              <p class="case-text">AI Perception의 시각·청각·피해 감지를 Blackboard의 타깃 정보와 연결하고, Team ID로 적대 대상을 구분했습니다. Behavior
-                Tree의 Task·Service·Decorator로 공격과 추적 조건을 나누고, 포탈·Level Sequence·보스 HP UI를 플레이 흐름에 연결했습니다.</p>
-              <h4 class="case-heading">문제 해결 · 공중 콤보의 타격과 거리 유지</h4>
-              <p class="case-text">공중에서는 무기에 붙은 작은 충돌체가 적을 놓쳐 콤보가 이어지지 않았습니다. AirCombo 동안 기존 무기 충돌체를 끄고 별도의 충돌 범위를 적용해
-                피격을 감지하도록 수정했습니다. 또한 좌표를 고정해 공중에 머무르게 하던 방식 대신 공격·피격 시 LaunchCharacter를 호출하고 상대 위치를 보정해, 캐릭터와 적이 멀어지는
-                문제를 다뤘습니다.</p>
-              <h4 class="case-heading">결과와 배운 점</h4>
-              <p class="case-text">전투 판정, 애니메이션, 이동과 상태 전환이 함께 맞아야 콤보가 이어진다는 점을 경험했습니다. 기능별 구현 설명과 코드는 GitHub에, 전투와 보스
-                진행 흐름은 시연 영상에 정리했습니다.</p>
-            </details>
+            <ul class="proj-desc-list">
+              <li>콤보·패링과 무기·스킬 시스템 구현</li>
+              <li>AI Perception·Behavior Tree 기반 적 AI 구성</li>
+              <li>공중 콤보 타격 판정과 캐릭터 간 거리 보정</li>
+            </ul>
             <div style="display:flex; gap:14px; flex-wrap:wrap;">
               <a class="ext-link" href="https://github.com/GyungSikHan/BlossomOfShadow" target="_blank"
                 rel="noopener">GitHub ↗</a>
@@ -2618,20 +2636,11 @@
             <p class="project-meta">2025.02.17–2025.03.07 · 4인 팀 · 팀장 / 무기·전투 시스템</p>
             <p class="proj-desc">인간과 SymBio가 융합된 세계를 배경으로 한 1인칭 FPS 팀 프로젝트입니다. 제한된 자원으로 전투하는 플레이를 위해 무기 장착부터
               조준·발사·재장전·피격까지 이어지는 클라이언트 흐름을 담당했습니다.</p>
-            <details class="project-details project-case project-inline"><summary>프로젝트 자세히 보기</summary>
-              <h4 class="case-heading">설계 · 무기 공통 동작과 캐릭터 기능 분리</h4>
-              <p class="case-text">WeaponComponent와 StatusComponent로 캐릭터 기능을 나누고, ACWeapon을 공통 기반으로 사용했습니다. 장착한 무기와 새로
-                선택한 무기의 타입을 비교해 장착 해제 또는 교체를 결정하고, 공통 호출 경로에서 각 무기의 동작을 실행하도록 구성했습니다.</p>
-              <h4 class="case-heading">구현 · 발사에서 피격까지</h4>
-              <p class="case-text">LineTrace와 Projectile 기반 충돌 처리, HitData 전달과 TakeDamage 호출을 연결했습니다. 충돌 결과를 데칼·파티클·사운드에
-                전달하고, Timeline과 Curve로 카메라 FOV 등을 보간해 조준 전환을 구현했습니다. 반동과 Camera Shake를 함께 적용해 발사 시 화면 반응을 구성했습니다.</p>
-              <h4 class="case-heading">문제 해결 · 몽타주 중단 후 행동 불가</h4>
-              <p class="case-text">몽타주가 중첩되거나 중단되면 상태가 복구되지 않아 다음 행동이 막히는 문제가 있었습니다. OnMontageEnded 델리게이트를 연결해 중단된 경우에도
-                상태를 복구하도록 수정했습니다. 팀장으로서 수류탄 투척과 팀원 스킬의 충돌 문제도 함께 확인하며 전투 기능 통합을 지원했습니다.</p>
-              <h4 class="case-heading">결과와 배운 점</h4>
-              <p class="case-text">무기별 기능을 추가하는 것뿐 아니라 애니메이션 종료·중단 시 상태를 복구하는 경로가 중요하다는 점을 확인했습니다. 공통 무기 구조, 조준 연출과 문제
-                해결 과정은 저장소의 구현 문서에서 확인할 수 있습니다.</p>
-            </details>
+            <ul class="proj-desc-list">
+              <li>컴포넌트와 공통 무기 클래스 기반 전투 구조 설계</li>
+              <li>LineTrace·Projectile 발사 및 조준·반동 구현</li>
+              <li>몽타주 종료 델리게이트로 행동 상태 복구</li>
+            </ul>
             <div style="display:flex; gap:14px; flex-wrap:wrap;">
               <a class="ext-link" href="https://github.com/GyungSikHan/1st-Team14-CH3-Project" target="_blank"
                 rel="noopener">GitHub ↗</a>
@@ -2654,20 +2663,11 @@
             <p class="project-meta">2025.05–2025.07 · 6인 팀 · AI 전투 / 방어구 / 메인 UI</p>
             <p class="proj-desc">혹한의 세계에서 생존하고 적과 전투하는 Survival Action 팀 프로젝트입니다. AI 전투 구조와 드래곤 공격, 방어구 장착, 메인 메뉴에서 게임으로
               진입하는 흐름을 담당했습니다.</p>
-            <details class="project-details project-case project-inline"><summary>프로젝트 자세히 보기</summary>
-              <h4 class="case-heading">설계 · AI 전투의 역할 분리</h4>
-              <p class="case-text">Combat·Weapon·Damage·Sound 로직을 분리하고, 공격 데이터의 몽타주를 공통 경로에서 실행하도록 구성했습니다. 데미지와 연출 정보를
-                데이터로 묶어 피격 처리에 전달하고, 공격 시점에 무기 충돌체를 활성화해 타격 구간을 제어했습니다.</p>
-              <h4 class="case-heading">문제 해결 · 드래곤 공격 후 행동 정지</h4>
-              <p class="case-text">DragonAttack Task가 즉시 성공을 반환하는 시점과 실제 공격 몽타주가 끝나는 시점이 달라 다음 행동으로 복귀하지 못하는 문제가 있었습니다.
-                ExecuteTask에서 InProgress를 반환해 실행 중 상태를 유지하고, 몽타주 종료 콜백에서 FinishLatentTask로 완료를 알리도록 흐름을 맞췄습니다.</p>
-              <h4 class="case-heading">장비와 게임 진입 흐름</h4>
-              <p class="case-text">ArmorComponent로 플레이어 방어구 장착을 처리하고, 멀티플레이 전환에 대비한 Replication·RPC 경로를 준비했습니다. 최종 프로젝트는
-                싱글플레이 기준으로 구성했습니다. 메인 메뉴 에셋도 GameMode·GameInstance 흐름에 맞춰 게임 시작과 연결했습니다.</p>
-              <h4 class="case-heading">결과와 배운 점</h4>
-              <p class="case-text">AI 행동을 명령하는 시점과 실제 행동이 끝나는 시점을 분리해 관리하는 경험을 쌓았습니다. 역할별 전투 구조와 비동기 Task 완료 처리는 관련 코드로,
-                장비와 게임 플레이 흐름은 시연 영상으로 확인할 수 있습니다.</p>
-            </details>
+            <ul class="proj-desc-list">
+              <li>Combat·Weapon·Damage·Sound로 AI 전투 역할 분리</li>
+              <li>몽타주 종료와 BT Task 완료를 연결해 행동 정지 해결</li>
+              <li>방어구 장착·동기화 구조와 메인 UI 연동</li>
+            </ul>
             <div style="display:flex; gap:14px; flex-wrap:wrap;">
               <a class="ext-link" href="https://github.com/GyungSikHan/1st-Team4-Final-Project" target="_blank"
                 rel="noopener">GitHub ↗</a>
@@ -2693,17 +2693,11 @@
             <p class="project-meta">C++ 콘솔 · 팀 프로젝트 · Game Manager / 기능 통합</p>
             <p class="proj-desc">플레이어가 메뉴를 선택해 전투·상점·인벤토리를 이용하는 콘솔 RPG입니다. 팀원이 구현한 캐릭터·몬스터·상점·아이템을 Game Manager에 연결해 하나의
               게임 진행 흐름으로 구성했습니다.</p>
-            <details class="project-details project-case project-inline"><summary>프로젝트 자세히 보기</summary>
-              <h4 class="case-heading">담당 역할 · 게임 루프와 상태 전환</h4>
-              <p class="case-text">Singleton 형태의 GameMGR를 중심으로 초기화, 플레이어 정보 출력, 전투 진입과 상점 방문을 연결했습니다. 사용자의 선택에 따라 다음 화면과
-                기능으로 이동하게 하고, 각 기능을 마친 뒤 게임을 계속 진행할 수 있도록 호출 흐름을 정리했습니다.</p>
-              <h4 class="case-heading">구현 · 종료 조건과 테스트 경로</h4>
-              <p class="case-text">일반 몬스터와 보스 생성, 플레이어 사망과 보스 처치 후의 처리, 게임 재시작 경로를 구성했습니다. StartGame의 디버그 옵션과 보스 진입 경로를
-                두어 주요 상황을 확인할 수 있도록 했습니다.</p>
-              <h4 class="case-heading">통합 관점에서의 학습</h4>
-              <p class="case-text">개별 기능이 실행되는 것과 전체 게임이 이어지는 것은 별개의 문제였습니다. Character·Monster·Shop·Item의 연결 지점을 Game
-                Manager에서 관리하며, 메뉴 입력·전투 결과·재시작 조건이 만나는 흐름을 정리하는 경험을 쌓았습니다.</p>
-            </details>
+            <ul class="proj-desc-list">
+              <li>Game Manager 중심의 전투·상점·인벤토리 통합</li>
+              <li>사망·보스 처치·재시작 흐름 구성</li>
+              <li>디버그 옵션과 보스 진입 경로로 주요 상황 확인</li>
+            </ul>
             <div style="display:flex; gap:14px; flex-wrap:wrap;">
               <a class="ext-link" href="https://github.com/GyungSikHan/Let_sDoItFirst" target="_blank"
                 rel="noopener">GitHub ↗</a>
@@ -2724,13 +2718,10 @@
             <p class="project-meta">개인 프로젝트 · Unreal Engine / Blueprint</p>
             <p class="proj-desc">언리얼 엔진의 기본 사용법을 익히기 위해 Blueprint로 제작한 점프 게임입니다. 플레이 가능한 결과물을 만들고 시연 영상과 배포 파일로 정리한 초기
               개인 프로젝트입니다.</p>
-            <details class="project-details project-case project-inline"><summary>프로젝트 자세히 보기</summary>
-              <h4 class="case-heading">제작 범위와 학습 목적</h4>
-              <p class="case-text">Blueprint를 활용해 게임을 구성하며 엔진 안에서 동작을 연결하고 결과를 확인하는 과정을 연습했습니다. 이후 C++ 기반 액션 프로젝트를 진행하기
-                전, 엔진 작업 흐름을 익히는 데 초점을 맞췄습니다.</p>
-              <h4 class="case-heading">결과물</h4>
-              <p class="case-text">실제 플레이 모습은 시연 영상에서 확인할 수 있으며, 실행 파일은 다운로드 링크로 제공하고 있습니다.</p>
-            </details>
+            <ul class="proj-desc-list">
+              <li>Blueprint 기반 점프 게임 제작</li>
+              <li>언리얼 엔진의 기본 작업 흐름 학습</li>
+            </ul>
             <div style="display:flex; gap:14px; flex-wrap:wrap;">
               <a class="ext-link"
                 href="https://drive.google.com/file/d/1_ENHwAlKtAaHlvmSbvVhLQZBWqV1XbrE/view?usp=sharing"
@@ -2751,13 +2742,11 @@
             </div>
             <h3 class="proj-name">반도체 개론 문제 풀이</h3>
             <p class="proj-desc">반도체개론 수업의 계산 과정과 수식 유도를 손으로 작성한 전공 과제.</p>
-            <details class="project-details project-inline"><summary>프로젝트 자세히 보기</summary>
-              <ul class="proj-desc-list">
-                <li>광전효과의 에너지 계산과 전자의 파동·회절 관련 연습문제를 풀었습니다.</li>
-                <li>원자 모형의 에너지와 궤도 반경 관계를 정리했습니다.</li>
-                <li>도핑 농도에 따른 전자·정공 농도 관계와 근사식을 유도했습니다.</li>
-              </ul>
-            </details>
+            <ul class="proj-desc-list">
+              <li>광전효과와 전자의 파동·회절 문제 풀이</li>
+              <li>원자 모형의 에너지·궤도 반경 관계 정리</li>
+              <li>도핑에 따른 전자·정공 농도 관계식 유도</li>
+            </ul>
             <!-- university-assets:start -->
             <details class="project-details">
               <summary>문제 풀이</summary>
@@ -2826,13 +2815,11 @@
             </div>
             <h3 class="proj-name">에너지공학 연구</h3>
             <p class="proj-desc">이차전지의 구성과 수소의 생산·저장·활용을 조사한 에너지공학 보고서 모음.</p>
-            <details class="project-details project-inline"><summary>프로젝트 자세히 보기</summary>
-              <ul class="proj-desc-list">
-                <li>리튬이온 전지의 구성 요소와 충전·방전 과정, 이차전지 종류를 정리했습니다.</li>
-                <li>국내외 수소산업 동향과 수소 생산 기술을 조사했습니다.</li>
-                <li>에너지 저장과 활용 기술을 두 보고서로 작성했습니다. 산업 동향은 2022년 과제 당시의 조사 내용입니다.</li>
-              </ul>
-            </details>
+            <ul class="proj-desc-list">
+              <li>리튬이온 전지의 구성과 충전·방전 원리 정리</li>
+              <li>수소 생산·저장·활용 기술 조사</li>
+              <li>2022년 과제 당시 수소산업 동향 분석</li>
+            </ul>
             <!-- university-assets:start -->
             <details class="project-details asset-documents">
               <summary>연구</summary>
@@ -2859,13 +2846,10 @@
             </div>
             <h3 class="proj-name">다목적 자율주행 비행 드론</h3>
             <p class="proj-desc">한국정보통신보안윤리학회가 개최한 4차 산업혁명 인재양성 연합 페스티벌에서 창업 아이디어 부문 우수상을 수상한 팀 프로젝트.</p>
-            <details class="project-details project-inline"><summary>프로젝트 자세히 보기</summary>
-              <ul class="proj-desc-list">
-                <li>2021년 10월부터 11월까지 다목적 자율주행 비행 드론을 주제로 창업 아이디어 프로젝트를 진행했습니다.</li>
-                <li>한경식·신완철 팀으로 창업 아이디어 부문에 참가해 우수상을 수상했습니다.</li>
-                <li>드론의 활용 아이디어를 제안한 기획 프로젝트입니다.</li>
-              </ul>
-            </details>
+            <ul class="proj-desc-list">
+              <li>드론 활용 방안과 창업 아이디어 기획</li>
+              <li>2인 팀으로 연합 페스티벌 창업 아이디어 부문 우수상 수상</li>
+            </ul>
             <div style="margin-top:14px;"><button type="button" class="cert-link" data-src="images/창업아이디어_우수상.pdf"
                 data-type="pdf" data-title="2021 제5회 4차 산업혁명 인재양성 연합 페스티벌 · 창업 아이디어 부문 우수상">우수상 상장 보기 ↗</button></div>
             <!-- university-assets:start -->
@@ -2896,17 +2880,11 @@
             </div>
             <h3 class="proj-name">마이크로캡슐 소화 패치 배치 연구</h3>
             <p class="proj-desc">5인 팀 무한도전에서 배전반 내부 소화 패치의 배치와 작동 결과를 검토한 캡스톤디자인 프로젝트.</p>
-            <details class="project-details project-case project-inline"><summary>프로젝트 자세히 보기</summary>
-              <h4 class="case-heading">목표와 팀 참여</h4>
-              <p class="case-text">5인 팀 무한도전의 캡스톤디자인으로, 배전반 내부 화재가 커지기 전에 소화 패치가 작동하도록 배치하는 방안을 검토했습니다. 기존 마이크로캡슐 소화 패치를
-                활용한 팀 실험에 참여하고, 선정 배경·작품 계획·시연 결과를 발표 자료로 정리했습니다.</p>
-              <h4 class="case-heading">실험 구성과 관찰</h4>
-              <p class="case-text">배전반 하단·양옆·중앙에 패치를 부착하고 하단에서 발생한 화재가 어느 위치의 패치와 접촉하는지 관찰했습니다. 불꽃은 위로 올라가 중앙 패치와 접촉했지만,
-                중앙 패치가 소모된 뒤에도 화재가 지속됐고 양옆·하단 패치는 대부분 남았습니다.</p>
-              <h4 class="case-heading">결과와 개선 방향</h4>
-              <p class="case-text">해당 실험에서는 화재 진압에 실패했습니다. 패치를 고르게 배치하는 것만으로는 충분하지 않다는 점을 확인하고, 상단·중앙에 집중하는 배치안을 제안했습니다.
-                개선안의 효과는 별도 후속 실험으로 검증해야 하며, 발표 PDF에는 실패 결과와 활동 사진을 함께 남겼습니다.</p>
-            </details>
+            <ul class="proj-desc-list">
+              <li>5인 팀 캡스톤으로 배전반 내부 소화 패치 배치 실험</li>
+              <li>화재 진압 실패와 위치별 패치 소모 결과 분석</li>
+              <li>상단·중앙 집중 배치안 제안 · 후속 검증 필요</li>
+            </ul>
             <!-- university-assets:start -->
             <details class="project-details asset-documents">
               <summary>연구</summary>
@@ -2929,13 +2907,11 @@
             </div>
             <h3 class="proj-name">플렉서블·스트레처블·웨어러블 디스플레이 연구</h3>
             <p class="proj-desc">형태 변형이 가능한 디스플레이 기술과 공정 특징을 정리한 전공 보고서.</p>
-            <details class="project-details project-inline"><summary>프로젝트 자세히 보기</summary>
-              <ul class="proj-desc-list">
-                <li>플렉서블·스트레처블·웨어러블 디스플레이를 주제로 기술 특징을 조사했습니다.</li>
-                <li>캐리어 글라스 위에 폴리이미드(PI)를 도포·경화한 뒤 TFT·증착·봉지 공정을 거치고, 레이저로 기판을 분리하는 Laser Lift-off 과정을 조사했습니다.</li>
-                <li>유기물·무기물 층을 교대로 적층하는 박막봉지(TFE)의 역할을 정리하고, 신축성 전극 재료와 웨어러블 기기의 센서·태양광 충전 활용 방향을 보고서에 담았습니다.</li>
-              </ul>
-            </details>
+            <ul class="proj-desc-list">
+              <li>플렉서블·스트레처블·웨어러블 기술 특징 조사</li>
+              <li>PI 기판 제작과 Laser Lift-off 공정 정리</li>
+              <li>박막봉지와 신축성 전극·센서 활용 조사</li>
+            </ul>
             <!-- university-assets:start -->
             <details class="project-details asset-documents">
               <summary>연구</summary>
@@ -2959,13 +2935,11 @@
             </div>
             <h3 class="proj-name">OLED 소자 공정과 구동 특성 분석 연구</h3>
             <p class="proj-desc">OLED의 구조와 제작 과정을 학습하고 측정 결과를 정리한 개인 실험 보고서.</p>
-            <details class="project-details project-inline"><summary>프로젝트 자세히 보기</summary>
-              <ul class="proj-desc-list">
-                <li>기판 표면처리, 발광영역 정의, 진공 증착, 봉지와 특성분석의 과정을 정리했습니다.</li>
-                <li>OLED 발광 원리와 전하 주입·수송층의 역할을 학습했습니다.</li>
-                <li>공정기술 마스크 자료와 전류·전압·휘도 및 스펙트럼 측정 자료를 함께 모았습니다.</li>
-              </ul>
-            </details>
+            <ul class="proj-desc-list">
+              <li>표면처리·진공 증착·봉지 등 OLED 제작 과정 정리</li>
+              <li>발광 원리와 전하 주입·수송층 역할 학습</li>
+              <li>전류·전압·휘도와 스펙트럼 측정 자료 분석</li>
+            </ul>
             <!-- university-assets:start -->
             <details class="project-details asset-documents">
               <summary>연구</summary>
@@ -3018,13 +2992,10 @@
             </div>
             <h3 class="proj-name">LCD 구조와 액정 동작 원리 연구</h3>
             <p class="proj-desc">LCD의 기본 구조와 광학적 특성, 액정 배향을 다룬 과제와 요약 기록.</p>
-            <details class="project-details project-inline"><summary>프로젝트 자세히 보기</summary>
-              <ul class="proj-desc-list">
-                <li>액정의 특성과 전극·유리기판·편광필름으로 구성된 LCD 구조를 정리했습니다.</li>
-                <li>편광과 편광자의 역할을 학습했습니다.</li>
-                <li>액정의 배향과 Twisted 구조를 다룬 1·2차 과제를 정리했습니다.</li>
-              </ul>
-            </details>
+            <ul class="proj-desc-list">
+              <li>LCD 구조와 액정의 광학적 특성 정리</li>
+              <li>편광필름의 역할과 액정 배향·Twisted 구조 학습</li>
+            </ul>
             <!-- university-assets:start -->
             <details class="project-details asset-documents">
               <summary>연구</summary>
@@ -3055,13 +3026,10 @@
             </div>
             <h3 class="proj-name">LED 발광 원리와 PN 접합 연구</h3>
             <p class="proj-desc">발광 다이오드의 특성과 반도체 접합을 다룬 두 차례의 전공 과제.</p>
-            <details class="project-details project-inline"><summary>프로젝트 자세히 보기</summary>
-              <ul class="proj-desc-list">
-                <li>전자와 정공의 재결합에 의한 LED 발광 원리와 소자의 장점을 정리했습니다.</li>
-                <li>PN 접합의 의미와 서로 다른 물질의 접합 현상을 학습했습니다.</li>
-                <li>페르미 준위와 캐리어 이동, 열적 평형 관련 내용을 보고서로 작성했습니다.</li>
-              </ul>
-            </details>
+            <ul class="proj-desc-list">
+              <li>전자·정공 재결합에 의한 LED 발광 원리 정리</li>
+              <li>PN 접합과 페르미 준위·캐리어 이동 학습</li>
+            </ul>
             <!-- university-assets:start -->
             <details class="project-details asset-documents">
               <summary>연구</summary>
@@ -3085,13 +3053,11 @@
             </div>
             <h3 class="proj-name">OLED 캐리어 주입, 수송과 도핑 연구</h3>
             <p class="proj-desc">유기발광다이오드의 전하 이동과 성능 개선 원리를 정리한 학기말 과제.</p>
-            <details class="project-details project-inline"><summary>프로젝트 자세히 보기</summary>
-              <ul class="proj-desc-list">
-                <li>열전자 방출, 터널링, 계면 에너지 준위 변화에 의한 전하 주입을 학습했습니다.</li>
-                <li>호핑 전도, 트랩과 전하 이동도 측정 방법을 정리했습니다.</li>
-                <li>공간 전하 제한 전류와 도핑 관련 내용을 학기말 보고서에 정리했습니다.</li>
-              </ul>
-            </details>
+            <ul class="proj-desc-list">
+              <li>열전자 방출·터널링에 의한 전하 주입 학습</li>
+              <li>호핑 전도·트랩과 전하 이동도 정리</li>
+              <li>공간 전하 제한 전류와 도핑 원리 조사</li>
+            </ul>
             <!-- university-assets:start -->
             <details class="project-details asset-documents">
               <summary>연구</summary>
@@ -3113,12 +3079,10 @@
             </div>
             <h3 class="proj-name">디스플레이 공정기술 이론 학습</h3>
             <p class="proj-desc">디스플레이공정기술 수업의 주차별 강의와 무기 EL 관련 학습 자료를 보관한 전공 학습 기록.</p>
-            <details class="project-details project-inline"><summary>프로젝트 자세히 보기</summary>
-              <ul class="proj-desc-list">
-                <li>보관 파일에서 1·2주차 강의자료와 무기 EL 자료를 확인했습니다.</li>
-                <li>실제 소자 제작과 측정 결과는 아래 무기 EL·OLED 공정실험 프로젝트에서 볼 수 있습니다.</li>
-              </ul>
-            </details>
+            <ul class="proj-desc-list">
+              <li>디스플레이 공정기술 주차별 강의자료 정리</li>
+              <li>무기 EL 관련 이론 학습</li>
+            </ul>
           </article>
 
           <article class="proj-card university-card" data-cat="university" data-semester="2018-2"
@@ -3130,17 +3094,11 @@
             </div>
             <h3 class="proj-name">디스플레이 공정실험 연구</h3>
             <p class="proj-desc">스크린 프린팅 공정으로 무기 EL 소자를 제작하고 전압·주파수에 따른 특성을 비교한 팀 실험.</p>
-            <details class="project-details project-case project-inline"><summary>프로젝트 자세히 보기</summary>
-              <h4 class="case-heading">목표와 담당 역할</h4>
-              <p class="case-text">4인 팀의 팀장으로 참여해 무기 EL 소자의 구조와 제작 과정, 구동 특성을 정리했습니다. ITO 기판에 형광층·유전층·배면전극층을 형성하고 전원을
-                연결해 발광 상태를 확인하는 실험입니다.</p>
-              <h4 class="case-heading">제작과 측정 과정</h4>
-              <p class="case-text">스크린 마스크를 정렬한 뒤 각 층의 페이스트를 인쇄·건조하고, 도전성 테이프로 전극을 연결했습니다. 주파수를 1,000 Hz로 설정해 문턱전압을
-                측정하고, 전압과 주파수를 바꿔 휘도·색좌표 등 구동 특성의 변화를 비교했습니다.</p>
-              <h4 class="case-heading">문제 해결과 결과</h4>
-              <p class="case-text">처음에는 전압과 주파수를 높여도 빛이 나지 않았습니다. 보고서에는 전극 주변 은박지의 접촉 상태를 조정한 뒤 정상 발광을 확인한 과정이 기록되어
-                있습니다. 측정에서는 전압과 주파수가 증가할 때 휘도가 증가하는 경향을 관찰했으며, 조립·접촉 상태도 측정 결과에 영향을 준다는 점을 고찰했습니다.</p>
-            </details>
+            <ul class="proj-desc-list">
+              <li>4인 팀장으로 스크린 프린팅 기반 무기 EL 소자 제작</li>
+              <li>전극 접촉 상태를 조정해 발광 불량 해결</li>
+              <li>전압·주파수에 따른 휘도·색좌표 변화 비교</li>
+            </ul>
             <!-- university-assets:start -->
             <details class="project-details asset-documents">
               <summary>연구</summary>
@@ -4226,17 +4184,11 @@
             </div>
             <h3 class="proj-name">플렉서블 디스플레이를 활용한 현수막</h3>
             <p class="proj-desc">2018 디스플레이 챌린지 신제품 부문에서 기존 현수막을 대체할 디스플레이형 광고 매체를 제안한 기획 프로젝트.</p>
-            <details class="project-details project-case project-inline"><summary>프로젝트 자세히 보기</summary>
-              <h4 class="case-heading">문제 정의와 제품 구상</h4>
-              <p class="case-text">일회용 현수막의 폐기와 관리 문제에서 출발해 광고 내용을 바꿔 반복 사용하는 플렉서블 디스플레이형 현수막을 제안했습니다. 2018 디스플레이 챌린지
-                신제품 부문에 제출한 아이디어 기획 프로젝트입니다.</p>
-              <h4 class="case-heading">사용 시나리오와 설계 내용</h4>
-              <p class="case-text">태양전지 충전, 롤러형 보관, 탈부착과 이동을 고려해 제품 구성을 정리했습니다. 광고 신청·조회와 불법 광고 신고·포인트 기능을 포함한 앱 활용 방안,
-                서버를 통한 광고 통합 관리와 시간대별 운영 시나리오를 함께 제안했습니다.</p>
-              <h4 class="case-heading">검토 사항과 결과물</h4>
-              <p class="case-text">운전자 눈부심에는 시간대별 밝기 조절, 초기 설치비에는 광고 수익 활용을 대응안으로 정리했습니다. 실제 제품이나 앱을 구현한 성과가 아니라, 문제 정의와
-                제품 구조·서비스 운영을 구체화한 기획안이며 PDF와 시안 이미지로 확인할 수 있습니다.</p>
-            </details>
+            <ul class="proj-desc-list">
+              <li>반복 사용 가능한 플렉서블 디스플레이 현수막 기획</li>
+              <li>태양전지 충전·롤러형 보관과 광고 관리 앱 구상</li>
+              <li>밝기 조절·광고 수익을 포함한 운영안 제안</li>
+            </ul>
             <!-- university-assets:start -->
             <details class="project-details asset-documents">
               <summary>연구</summary>
@@ -4308,17 +4260,11 @@
             </div>
             <h3 class="proj-name">스트레인게이티 패턴 연구</h3>
             <p class="proj-desc">웨어러블 디스플레이 활동에서 스트레인게이지의 원리를 조사하고 패턴을 구상한 설계·실험 기록.</p>
-            <details class="project-details project-case project-inline"><summary>프로젝트 자세히 보기</summary>
-              <h4 class="case-heading">목표와 설계</h4>
-              <p class="case-text">변형에 따른 저항 변화로 힘이나 움직임을 감지하는 스트레인게이지를 주제로 원리를 조사하고 패턴 설계와 제작 실험에 참여했습니다. 그래핀 구조와 물결
-                모양을 참고한 패턴 아이디어, 센서 구조와 응용 사례를 발표 자료로 정리했습니다.</p>
-              <h4 class="case-heading">실험 과정과 한계</h4>
-              <p class="case-text">참여 보고서에는 유리판에 구리를 증착한 뒤 분리하고, 변형을 주면서 저항 변화를 측정하는 과정이 기록되어 있습니다. 초기에는 원상 복귀 시 저항도 처음
-                값으로 돌아올 것으로 예상했으나, 제작된 구리의 저항이 예상보다 낮아 의도한 변화량을 측정하지 못했습니다.</p>
-              <h4 class="case-heading">고찰과 결과물</h4>
-              <p class="case-text">후속 제작에서는 초기 저항을 더 높이는 방향을 제안했습니다. 성공한 센서 성능으로 제시하지 않고, 원리 조사·패턴 구상·공정 사진·측정 한계를 함께 남긴
-                실험 기록입니다.</p>
-            </details>
+            <ul class="proj-desc-list">
+              <li>스트레인게이지 원리 조사와 센서 패턴 구상</li>
+              <li>구리 증착·분리 후 변형에 따른 저항 측정</li>
+              <li>측정 한계 분석과 초기 저항 개선 방향 제안</li>
+            </ul>
             <!-- university-assets:start -->
             <details class="project-details asset-documents">
               <summary>연구</summary>
@@ -4509,13 +4455,10 @@
             </div>
             <h3 class="proj-name">디스플레이 평가 실험 화질 특성 측정 연구</h3>
             <p class="proj-desc">LCD·PDP의 휘도, 명암비, 색 특성 등을 측정하고 결과를 정리한 실험 보고서 모음.</p>
-            <details class="project-details project-inline"><summary>프로젝트 자세히 보기</summary>
-              <ul class="proj-desc-list">
-                <li>색좌표와 색재현 범위, 색재현율의 개념과 측정 내용을 정리했습니다.</li>
-                <li>화면 밝기·명암 조건을 바꾸며 휘도와 감마 관련 측정 데이터를 기록했습니다.</li>
-                <li>조도에 따른 명암비 변화와 측정 조건에 의한 오차 가능성을 보고서에서 검토했습니다.</li>
-              </ul>
-            </details>
+            <ul class="proj-desc-list">
+              <li>색좌표·색재현율과 휘도·감마 측정</li>
+              <li>조도에 따른 명암비 변화와 측정 오차 검토</li>
+            </ul>
             <!-- university-assets:start -->
             <details class="project-details asset-documents">
               <summary>연구</summary>
@@ -4578,13 +4521,10 @@
             </div>
             <h3 class="proj-name">디스플레이 평가기술 플랑크 법칙 연구</h3>
             <p class="proj-desc">디스플레이 평가기술 수업에서 빛과 복사의 기초 이론을 정리한 학기말 과제.</p>
-            <details class="project-details project-inline"><summary>프로젝트 자세히 보기</summary>
-              <ul class="proj-desc-list">
-                <li>플랑크 법칙을 주파수와 파장의 함수 형태로 정리했습니다.</li>
-                <li>복사 에너지의 분포와 온도, 빈의 변위 법칙의 관계를 학습했습니다.</li>
-                <li>수식에 사용되는 기호와 단위를 정리했습니다.</li>
-              </ul>
-            </details>
+            <ul class="proj-desc-list">
+              <li>주파수·파장에 따른 플랑크 법칙 정리</li>
+              <li>온도와 복사 에너지 분포·빈의 변위 법칙 학습</li>
+            </ul>
             <!-- university-assets:start -->
             <details class="project-details asset-documents">
               <summary>연구</summary>
@@ -4606,13 +4546,10 @@
             </div>
             <h3 class="proj-name">플라즈마 기초 연구</h3>
             <p class="proj-desc">물질의 상태, 플라즈마의 특성, 방전 현상을 다룬 두 차례의 전공 과제.</p>
-            <details class="project-details project-inline"><summary>프로젝트 자세히 보기</summary>
-              <ul class="proj-desc-list">
-                <li>플라즈마의 정의와 구성 입자, 전기적 특성을 정리했습니다.</li>
-                <li>물질의 상태를 구분하는 조건과 원자 간 상호작용을 학습했습니다.</li>
-                <li>절연파괴와 기체 방전의 개념을 설명하는 보고서를 작성했습니다.</li>
-              </ul>
-            </details>
+            <ul class="proj-desc-list">
+              <li>플라즈마 구성 입자와 전기적 특성 정리</li>
+              <li>물질 상태·절연파괴와 기체 방전 원리 학습</li>
+            </ul>
             <!-- university-assets:start -->
             <details class="project-details asset-documents">
               <summary>연구</summary>
@@ -4636,13 +4573,10 @@
             </div>
             <h3 class="proj-name">장영실의 창의성과 디지털 사회 변화 연구</h3>
             <p class="proj-desc">장영실의 과학기술 업적과 융합적 사고, 스마트폰 중심의 사회 변화를 다룬 5조 발표 자료.</p>
-            <details class="project-details project-inline"><summary>프로젝트 자세히 보기</summary>
-              <ul class="proj-desc-list">
-                <li>장영실과 조선의 과학기술을 조사하고 꿈·생각·도전이라는 주제로 강의 내용을 정리했습니다.</li>
-                <li>포노사피엔스와 디지털 산업, 인공지능 활용 사례를 주제로 팀 발표를 구성했습니다.</li>
-                <li>자료에 포함된 산업 사례와 수치는 당시 발표 내용입니다.</li>
-              </ul>
-            </details>
+            <ul class="proj-desc-list">
+              <li>장영실의 과학기술 업적과 창의적 사고 조사</li>
+              <li>포노사피엔스·디지털 산업·AI 활용 사례 팀 발표</li>
+            </ul>
             <!-- university-assets:start -->
             <details class="project-details asset-documents">
               <summary>연구</summary>
@@ -4667,13 +4601,11 @@
             </div>
             <h3 class="proj-name">Scratch 잠수부 장애물 회피 게임</h3>
             <p class="proj-desc">방향키로 잠수부를 움직이고 상어와 게를 피하도록 구성한 Scratch 게임 실습.</p>
-            <details class="project-details project-inline"><summary>프로젝트 자세히 보기</summary>
-              <ul class="proj-desc-list">
-                <li>방향키 입력에 따라 캐릭터의 방향과 위치를 변경하는 블록을 구성했습니다.</li>
-                <li>적의 반복 이동과 화면 가장자리 반사, 상어의 무작위 회전을 적용했습니다.</li>
-                <li>적과의 접촉 시 소리 재생과 캐릭터 표시 변경 후 스크립트를 종료하는 흐름을 구성했습니다.</li>
-              </ul>
-            </details>
+            <ul class="proj-desc-list">
+              <li>방향키 기반 잠수부 이동 구현</li>
+              <li>적의 반복 이동·반사와 무작위 회전 구성</li>
+              <li>접촉 시 소리·표시 변경과 게임 종료 처리</li>
+            </ul>
             <!-- university-assets:start -->
             <details class="project-details asset-documents">
               <summary>과제·발표 PDF 보기 · 1개</summary>
@@ -4698,13 +4630,11 @@
             </div>
             <h3 class="proj-name">CT와 SW의 이해</h3>
             <p class="proj-desc">CT와 SW의 이해 수업에서 작성한 논리 게이트, 진법 변환, 정보 탐색 학습 자료.</p>
-            <details class="project-details project-inline"><summary>프로젝트 자세히 보기</summary>
-              <ul class="proj-desc-list">
-                <li>OR·NAND·XOR 게이트와 10진수·2진수 변환 과제 파일을 모았습니다.</li>
-                <li>학교·학과 이름 입력에 따라 메시지를 보내고 해당 화면을 표시하는 프로그램을 구성했습니다.</li>
-                <li>DNS 학습 파일과 아이디어 구상·설계·문제점·해결 과정을 다룬 조별 발표 자료를 함께 정리했습니다.</li>
-              </ul>
-            </details>
+            <ul class="proj-desc-list">
+              <li>논리 게이트와 진법 변환 실습</li>
+              <li>입력값에 따른 메시지·화면 표시 프로그램 구성</li>
+              <li>DNS 학습과 조별 아이디어 설계 발표</li>
+            </ul>
             <!-- university-assets:start -->
             <details class="project-details">
               <summary>이미지 보기 · 1장</summary>
@@ -4720,26 +4650,29 @@
             <!-- university-assets:end -->
           </article>
 
-          <article class="proj-card university-card" data-cat="university" data-semester="2017-2"
+          <article class="proj-card university-card" data-cat="university" data-semester="2017-1 2017-2"
             id="university-2017-2-em">
+            <span id="university-2017-1-em"></span>
             <div class="project-cover-placeholder" aria-label="대표 이미지 없음">PROJECT ARCHIVE</div>
             <div class="proj-top">
-              <div class="proj-tags"><span class="tag">2017년 2학기</span><span class="tag">전자기학 II</span><span
+              <div class="proj-tags"><span class="tag">2017년 1·2학기</span><span class="tag">전자기학 I · II</span><span
                   class="tag">문제 풀이</span></div>
             </div>
-            <h3 class="proj-name">전자기학 2 과제</h3>
-            <p class="proj-desc">도체·유전체·자계 관련 계산을 다룬 전자기학2 수업 과제 모음.</p>
-            <details class="project-details project-inline"><summary>프로젝트 자세히 보기</summary>
-              <ul class="proj-desc-list">
-                <li>직선 도체와 도선 중심의 자계, 전류밀도, 자속 관련 문제를 풀었습니다.</li>
-                <li>스토크스 정리와 전하에 작용하는 힘을 다룬 연습문제를 정리했습니다.</li>
-                <li>도체 저항, 유전체 분극, 경계면 관련 계산 과제를 작성했습니다.</li>
-              </ul>
-            </details>
+            <h3 class="proj-name">전자기학</h3>
+            <p class="proj-desc">전자기학 I·II 수업의 전계·도체·유전체·자계 관련 문제 풀이와 증명 과제를 정리한 전공 학습 기록.</p>
+            <ul class="proj-desc-list">
+              <li>전자기학 I: 전계 계산과 연습문제·증명 과제</li>
+              <li>전자기학 II: 도체·유전체·자계와 전류밀도 계산</li>
+              <li>스토크스 정리와 전하에 작용하는 힘 학습</li>
+            </ul>
             <!-- university-assets:start -->
             <details class="project-details asset-documents">
               <summary>연구</summary>
               <ul class="asset-document-list">
+                <li><button type="button" class="cert-link"
+                    data-src="documents/university/archive/university-2017-1-em/9d8d82449c4939.pdf" data-type="pdf"
+                    data-title="전자기학문제풀이">전자기학문제풀이 ↗</button></li>
+
                 <li><button type="button" class="cert-link"
                     data-src="documents/university/archive/university-2017-2-em/6748c575fd50c4.pdf" data-type="pdf"
                     data-title="전자기학2 문제풀이">전자기학2 문제풀이 ↗</button></li>
@@ -4748,27 +4681,20 @@
             <!-- university-assets:end -->
           </article>
 
-          <article class="proj-card university-card" data-cat="university" data-semester="2017-1"
+          <article class="proj-card university-card" data-cat="university" data-semester="2016-2 2017-1"
             id="university-2017-1-c">
+            <span id="university-2016-2-c"></span>
             <div class="project-cover-placeholder" aria-label="대표 이미지 없음">PROJECT ARCHIVE</div>
             <div class="proj-top">
-              <div class="proj-tags"><span class="tag">2017년 1학기</span><span class="tag">C / C++ · 자료구조</span></div>
+              <div class="proj-tags"><span class="tag">2016년 2학기 · 2017년 1학기</span><span class="tag">C / C++ · 자료구조</span></div>
             </div>
-            <h3 class="proj-name">C 언어 고급 실습</h3>
-            <p class="proj-desc">계산기와 연산 라이브러리 분리, 파일 기록 실습을 중심으로 클래스·상속, 연결 리스트, STL과 자료구조 설계 풀이까지 함께 정리한 C/C++ 학습 기록.
-            </p>
-            <details class="project-details project-inline"><summary>프로젝트 자세히 보기</summary>
-              <ul class="proj-desc-list">
-                <li><strong>함수 분리와 파일 출력:</strong> Calculator·MyLibrary를 헤더 선언과 연산 구현으로 나누고, MyLog에서 명령행으로 받은 두 정수의 비교
-                  결과를 파일에 기록했습니다.</li>
-                <li><strong>클래스와 상속:</strong> Animal에 공통 속성을 모으고 PIG·COW·DOG가 상속하는 예제로 생성자와 접근 제어를 연습했습니다.</li>
-                <li><strong>연결 리스트:</strong> 값과 다음 노드 포인터를 가진 구조체를 사용해 끝에 노드를 추가하고, 시작 노드부터 순회하며 출력하는 코드를 작성했습니다.</li>
-                <li><strong>STL과 격자 변환:</strong> vector·정렬·문자열 처리 문제를 정리하고, N×N 배열을 시계 방향으로 90도 회전하는 예제에서 입력·변환·출력 함수를
-                  분리했습니다.</li>
-                <li><strong>확장 학습:</strong> MinStack·배열 섞기·이진 트리 직렬화 등 설계 풀이를 함께 보관했습니다. 추가 자료의 작성 시기는 별도로 확정하지 않았으며,
-                  미완성 코드의 보완 사항은 README에서 확인할 수 있습니다.</li>
-              </ul>
-            </details>
+            <h3 class="proj-name">C언어 실습</h3>
+            <p class="proj-desc">C언어 기초·고급 수업에서 제어문·함수·배열·포인터를 연습하고, 파일 처리와 C/C++ 클래스·자료구조까지 확장한 학습 기록.</p>
+            <ul class="proj-desc-list">
+              <li>기초: 제어문·함수·배열과 포인터 정렬 실습</li>
+              <li>고급: 연산 라이브러리 분리와 파일 입출력</li>
+              <li>C/C++ 클래스·상속·연결 리스트와 STL 학습</li>
+            </ul>
             <div style="margin-top:14px;"><a class="ext-link"
                 href="https://github.com/GyungSikHan/university-c-programming" target="_blank"
                 rel="noopener noreferrer">GitHub 코드 보기 ↗</a></div>
@@ -4783,13 +4709,10 @@
             </div>
             <h3 class="proj-name">디스플레이개론 연구</h3>
             <p class="proj-desc">주변 디스플레이 제품의 특성과 당시 디스플레이 산업 기사를 조사한 과제.</p>
-            <details class="project-details project-inline"><summary>프로젝트 자세히 보기</summary>
-              <ul class="proj-desc-list">
-                <li>사용 중인 모니터를 대상으로 화면 크기·화면비·해상도 등 제품 특성을 조사했습니다.</li>
-                <li>OLED 설비 투자 등 2017년 디스플레이 산업 관련 기사를 수집하고 정리했습니다.</li>
-                <li>제품 조사 보고서와 기사 스크랩 과제를 하나의 학습 기록으로 묶었습니다.</li>
-              </ul>
-            </details>
+            <ul class="proj-desc-list">
+              <li>주변 디스플레이 제품의 화면·해상도 특성 조사</li>
+              <li>2017년 디스플레이 산업 기사와 OLED 투자 동향 정리</li>
+            </ul>
             <!-- university-assets:start -->
             <details class="project-details asset-documents">
               <summary>연구</summary>
@@ -4805,56 +4728,9 @@
             <!-- university-assets:end -->
           </article>
 
-          <article class="proj-card university-card" data-cat="university" data-semester="2017-1"
-            id="university-2017-1-em">
-            <div class="project-cover-placeholder" aria-label="대표 이미지 없음">PROJECT ARCHIVE</div>
-            <div class="proj-top">
-              <div class="proj-tags"><span class="tag">2017년 1학기</span><span class="tag">전자기학 I</span><span
-                  class="tag">문제 풀이</span></div>
-            </div>
-            <h3 class="proj-name">전자기학 기초 과제</h3>
-            <p class="proj-desc">전자기학1 수업의 연습문제 풀이와 증명 과제를 정리한 전공 학습 기록.</p>
-            <details class="project-details project-inline"><summary>프로젝트 자세히 보기</summary>
-              <ul class="proj-desc-list">
-                <li>교재의 여러 연습문제에 대한 풀이 문서를 작성했습니다.</li>
-                <li>전계의 방향과 성분 간 관계를 다룬 계산 및 설명을 정리했습니다.</li>
-                <li>증명 과제 두 편과 개별 문제 풀이를 함께 보관했습니다.</li>
-              </ul>
-            </details>
-            <!-- university-assets:start -->
-            <details class="project-details asset-documents">
-              <summary>연구</summary>
-              <ul class="asset-document-list">
-                <li><button type="button" class="cert-link"
-                    data-src="documents/university/archive/university-2017-1-em/9d8d82449c4939.pdf" data-type="pdf"
-                    data-title="전자기학문제풀이">전자기학문제풀이 ↗</button></li>
-              </ul>
-            </details>
-            <!-- university-assets:end -->
-          </article>
 
-          <article class="proj-card university-card" data-cat="university" data-semester="2016-2"
-            id="university-2016-2-c">
-            <div class="project-cover-placeholder" aria-label="대표 이미지 없음">PROJECT ARCHIVE</div>
-            <div class="proj-top">
-              <div class="proj-tags"><span class="tag">2016년 2학기</span><span class="tag">제어문 · 함수 · 포인터</span></div>
-            </div>
-            <h3 class="proj-name">C언어 기초 실습</h3>
-            <p class="proj-desc">입력값에 따른 도형 출력부터 함수 계산, 배열 인덱싱과 포인터 정렬까지 C언어의 제어 흐름과 데이터 접근 방식을 연습한 코드 모음.</p>
-            <details class="project-details project-inline"><summary>프로젝트 자세히 보기</summary>
-              <ul class="proj-desc-list">
-                <li><strong>조건문과 반복문:</strong> 홀짝에 따라 정사각형·십자 모양을 출력하고, 요금 계산·성적 분류·구구단 등 문제별 풀이를 정리했습니다.</li>
-                <li><strong>함수와 배열:</strong> 두 다항식의 차이를 −10부터 10까지 계산해 21칸 배열에 저장·합산하고, <code>y * 7 + x</code>로 1차원 배열을
-                  7×7 격자로 표현했습니다.</li>
-                <li><strong>포인터 정렬:</strong> <code>*(pa + i)</code>로 배열 원소에 접근하고 비교·교환하면서 오름차순으로 정렬하는 예제를 정리했습니다.</li>
-                <li><strong>학습 범위:</strong> 함수별 최댓값·소수 판별·자릿수 뒤집기와 배열·문자열 처리까지 확장했습니다. 저장소에는 실행 소스와 함께 주석 처리된 풀이·코드 조각도
-                  포함되어 있습니다.</li>
-              </ul>
-            </details>
-            <div style="margin-top:14px;"><a class="ext-link"
-                href="https://github.com/GyungSikHan/university-c-programming" target="_blank"
-                rel="noopener noreferrer">GitHub 코드 보기 ↗</a></div>
-          </article>
+
+
 
           <article class="proj-card university-card" data-cat="university" data-semester="2016-2"
             id="university-2016-2-design">
@@ -4862,19 +4738,13 @@
             <div class="proj-top">
               <div class="proj-tags"><span class="tag">2016년 2학기</span><span class="tag">창의적공학설계</span></div>
             </div>
-            <h3 class="proj-name">공 이송 장치 설계와 실패 원인 개선</h3>
+            <h3 class="proj-name">공 이송 장치</h3>
             <p class="proj-desc">종이컵을 이용한 공 이송 장치를 구상·제작하고 테스트 결과를 바탕으로 구조를 개선한 3인 팀 프로젝트.</p>
-            <details class="project-details project-case project-inline"><summary>프로젝트 자세히 보기</summary>
-              <h4 class="case-heading">프로젝트와 담당 역할</h4>
-              <p class="case-text">종이컵을 이용해 공을 옮기는 장치를 설계한 3인 팀 프로젝트입니다. 발표 자료에서 한경식의 역할은 아이디어 및 제작으로 기록되어 있으며, 초기 아이디어와
-                제작 과정, 실험과 개선 결과를 팀 발표로 정리했습니다.</p>
-              <h4 class="case-heading">문제 분석과 구조 개선</h4>
-              <p class="case-text">실이 종이컵을 당기는 과정에서 중심이 흐트러져 레일 밖으로 나가는 문제가 발생했습니다. 단순히 옆벽을 세우는 방식 대신 나무젓가락으로 레일을 잡는 날개를
-                만들어, 이송 중 장치가 경로를 벗어나지 않도록 구조를 바꿨습니다.</p>
-              <h4 class="case-heading">관찰 결과</h4>
-              <p class="case-text">1차 경진대회에서는 두 번의 시도 중 한 번 실패했고, 실패 요인을 분석해 수정한 뒤 2차 테스트에서 더 안정적인 동작을 확인했다고 발표 자료에
-                기록했습니다. 제작 사진과 개선 과정은 연결된 PDF에서 볼 수 있습니다.</p>
-            </details>
+            <ul class="proj-desc-list">
+              <li>3인 팀으로 종이컵 공 이송 장치 설계·제작</li>
+              <li>레일 이탈 원인 분석과 나무젓가락 날개 구조 적용</li>
+              <li>개선 후 2차 테스트에서 동작 안정성 확인</li>
+            </ul>
             <!-- university-assets:start -->
             <details class="project-details asset-documents">
               <summary>과제 및 발표 자료</summary>
@@ -4897,14 +4767,10 @@
             </div>
             <h3 class="proj-name">SolidWorks 기반 3D 부품 모델링</h3>
             <p class="proj-desc">기초 CAD 및 실습 수업에서 다양한 부품을 3D로 모델링하고 도면 작성 과제를 수행했습니다. 실습 결과를 26장의 이미지로 정리했습니다.</p>
-            <details class="project-details project-case project-inline"><summary>프로젝트 자세히 보기</summary>
-              <h4 class="case-heading">실습 목적</h4>
-              <p class="case-text">SolidWorks에서 부품의 입체 형상을 모델링하고 도면으로 표현하는 기초 CAD 실습을 진행했습니다. 여러 파트 파일과 도면 파일을 통해 같은 도구로
-                다양한 형상을 표현하는 작업을 연습했습니다.</p>
-              <h4 class="case-heading">결과물 구성</h4>
-              <p class="case-text">원본 모델을 26장의 이미지로 정리했습니다. 대표 이미지에서는 구멍과 단차가 있는 원형 부품 등 주요 형상을 확인할 수 있고, 전체 갤러리에서는 개별
-                파트의 실습 결과를 비교할 수 있습니다.</p>
-            </details>
+            <ul class="proj-desc-list">
+              <li>SolidWorks를 활용한 3D 부품 모델링</li>
+              <li>부품별 도면 작성과 실습 이미지 26장 정리</li>
+            </ul>
 
             <details class="project-details">
               <summary>전체 실습 이미지</summary>
